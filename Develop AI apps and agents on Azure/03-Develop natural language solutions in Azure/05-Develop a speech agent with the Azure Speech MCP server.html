@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Develop a speech agent with the Azure Speech MCP server</title>
+    <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #0078d4; border-bottom: 2px solid #0078d4; padding-bottom: 10px; }
+    h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0px; margin-bottom: 0px; }
+    .section { margin-bottom: 40px; }
+    .section-header { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .section-header a { color: #0078d4; text-decoration: none; }
+    .section-header a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    pre { background: #f4f4f4; padding: 15px; overflow-x: auto; border-radius: 5px; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .NOTE, .TIP, .IMPORTANT { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid; }
+    .IMPORTANT { background-color: #e7f3ff; border-color: #0078d4; }
+    .IMPORTANT > p:first-child { font-weight: bold; color: #0078d4; margin-top: 0; }
+    .TIP { background-color: #e8f5e9; border-color: #4caf50; }
+    .TIP > p:first-child { font-weight: bold; color: #2e7d32; margin-top: 0; }
+    .NOTE { background-color: #f3e5f5; border-color: #9c27b0; }
+    .NOTE > p:first-child { font-weight: bold; color: #7b1fa2; margin-top: 0; }
+</style>
+</head>
+<body>
+    <h1>Develop a speech agent with the Azure Speech MCP server</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>1. Introduction</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/01-introduction">https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/01-introduction</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Introduction</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Azure Speech in Foundry Tools provides speech-to-text and text-to-speech capabilities that you can integrate into AI applications. These capabilities let you transcribe audio to text and synthesize natural-sounding speech from text.</p>
+<p>While you can call these capabilities directly through the Speech SDK or REST APIs, you can also make them available to an AI agent through the <strong>Azure Speech Model Context Protocol (MCP) server</strong>. This approach lets the agent handle speech tasks based on a user's natural language request, without you needing to write specific code for each speech operation.</p>
+<p>For example, suppose you work for a company that needs to process customer support calls. Your team needs to transcribe recorded calls to text for analysis, and generate audio responses that can be played back to customers. Rather than building separate integrations for transcription and synthesis, you can create an AI agent that uses the Azure Speech MCP server to perform both tasks through a single tool connection.</p>
+<p>In this module, you learn how the Azure Speech MCP server works, how to connect it to an AI agent in Microsoft Foundry, and how to build a client application that interacts with the agent programmatically.</p>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>We recognize that different people like to learn in different ways. You can choose to complete this module in video-based format or you can read the content as text and images. The text contains greater detail than the videos, so in some cases you might want to refer to it as supplemental material to the video presentation.</p>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>The Azure Speech MCP server is currently in public preview. Details described in this module are subject to change.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>2. Understand the Azure Speech MCP server</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/02-understand-speech-mcp">https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/02-understand-speech-mcp</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Understand the Azure Speech MCP server</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The Azure Speech MCP server connects AI agents to Azure Speech in Foundry Tools through the <strong>Model Context Protocol (MCP)</strong>. Before exploring the Speech MCP server itself, it helps to understand what MCP is and how it enables agents to use external tools.</p>
+<h2 id="what-is-the-model-context-protocol">What is the Model Context Protocol?</h2>
+<p>The Model Context Protocol (MCP) is an open protocol that defines how AI agents interact with external tools, data sources, and services. MCP uses a client-server architecture with the following components:</p>
+<ul>
+<li><strong>Host</strong>: The application that runs the agent (such as Microsoft Foundry or a custom app).</li>
+<li><strong>Client</strong>: A component within the host that manages connections to MCP servers and handles communication.</li>
+<li><strong>Server</strong>: A program that exposes tools, resources, and prompts that an agent can discover and call.</li>
+</ul>
+<p>When an agent connects to an MCP server, it receives a catalog of available tools along with descriptions of what each tool does. The agent can then choose the right tool based on the user's request. This approach is called <em>dynamic tool discovery</em> — the agent doesn't need hardcoded knowledge of each tool. Instead, it queries the MCP server at runtime to find out what's available.</p>
+<p>The key advantage of MCP for AI agents is flexibility. Tools can be added, updated, or removed on the server without modifying the agent itself. The agent always has access to the latest tool definitions, which makes MCP-based solutions easier to maintain and scale.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>To learn more about MCP architecture and how to build custom MCP tool integrations, see the <strong><a data-linktype="absolute-path" href="/en-us/training/modules/connect-agent-to-mcp-tools/">Integrate MCP Tools with Azure AI Agents</a></strong> module.</p>
+</div>
+<h2 id="azure-speech-mcp-server-capabilities">Azure Speech MCP server capabilities</h2>
+<p>The Azure Speech MCP server exposes two core speech capabilities as tools that any MCP-compatible agent can call:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Speech-to-text (Recognize)</strong></td>
+<td>Converts audio files to text using advanced speech recognition. Supports WAV, MP3, OGG, FLAC, MP4, M4A, AAC, and other common audio formats. Includes options for language selection, phrase hints for improved accuracy, profanity filtering, and detailed or simple output formats.</td>
+</tr>
+<tr>
+<td><strong>Text-to-speech (Synthesize)</strong></td>
+<td>Converts text input into natural-sounding audio files using neural text-to-speech voices. Supports multiple languages and voices (for example, <code>en-US-JennyNeural</code> or <code>en-GB-SoniaNeural</code>), and generates output in WAV, MP3, or other formats.</td>
+</tr>
+</tbody>
+</table>
+<p>When you connect the Speech MCP server to an agent, the agent receives the available speech tools and their descriptions. Based on the user's prompt, the agent decides which tool to call. For example, if a user says "Transcribe this audio file," the agent calls the speech-to-text tool. If the user says "Generate speech from this text," the agent calls the text-to-speech tool.</p>
+<h2 id="how-the-agent-selects-tools">How the agent selects tools</h2>
+<p>The tool selection process works as follows:</p>
+<ol>
+<li>The user sends a prompt to the agent.</li>
+<li>The agent analyzes the prompt and determines which speech task needs to be performed.</li>
+<li>The agent checks the available MCP tools and their descriptions to find the best match.</li>
+<li>The agent calls the selected tool through the MCP server, passing the relevant input (audio file URL or text).</li>
+<li>The MCP server processes the request using Azure Speech and returns the results (transcribed text or a link to an audio file).</li>
+<li>The agent presents the results to the user in a natural language response.</li>
+</ol>
+<p>The agent handles tool selection autonomously, so you don't need to write routing logic to determine whether a prompt requires speech-to-text or text-to-speech.</p>
+<h2 id="storage-requirements">Storage requirements</h2>
+<p>Unlike text-only MCP tools, the Azure Speech MCP server works with audio files, which requires an <strong>Azure Storage account</strong>.</p>
+<ul>
+<li><strong>Text-to-speech</strong>: The Speech MCP server saves generated audio files to an Azure Blob Storage container. The agent's response includes a link to the generated audio file.</li>
+<li><strong>Speech-to-text</strong>: The agent can transcribe audio files from a publicly accessible URL or from an Azure Blob Storage container accessed with a SAS URL.</li>
+</ul>
+<p>When you connect the Speech MCP server to your agent, you provide a <strong>SAS URL</strong> for a blob container. The SAS URL grants the MCP server permission to read and write files in that container.</p>
+<div class="IMPORTANT">
+<p>Important</p>
+<p>Treat SAS URLs as secrets. Use the shortest practical expiry time, scope them to a single container, and don't embed them in source code, agent prompts, or chat transcripts.</p>
+</div>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To use the Azure Speech MCP server with an agent, you need:</p>
+<ul>
+<li>An <strong>Azure subscription</strong>.</li>
+<li>A <strong>Foundry resource and project</strong> — you need Contributor or Owner role on the resource group. Your Foundry resource includes speech capabilities.</li>
+<li>An <strong>Azure Storage account</strong> with a blob container for storing audio files.</li>
+<li>A <strong>SAS URL</strong> for the blob container with read, write, add, create, and list permissions.</li>
+</ul>
+<h2 id="security-considerations">Security considerations</h2>
+<p>The Azure Speech MCP server uses key-based authentication. When you create the connection, you provide your resource key and a blob container SAS URL. Follow these best practices:</p>
+<ul>
+<li>Store keys and SAS URLs in a secure secret store and rotate them regularly.</li>
+<li>Avoid embedding keys or SAS URLs directly in source code, scripts, or documentation.</li>
+<li>Use the shortest practical SAS expiry time and scope it to the minimum required resource.</li>
+<li>Rotate keys immediately if you suspect they're exposed.</li>
+</ul>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>3. Connect and use the Speech MCP server with an agent</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/03-connect-use-speech-mcp">https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/03-connect-use-speech-mcp</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Connect and use the Speech MCP server with an agent</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>After you understand the capabilities of the Azure Speech MCP server, the next step is to connect it to an agent and start using it. This involves setting up storage, creating an agent in Microsoft Foundry, connecting the Speech MCP tool, testing it in the agent playground, and optionally building a client application.</p>
+<h2 id="set-up-azure-blob-storage">Set up Azure Blob Storage</h2>
+<p>The Azure Speech MCP server requires an Azure Storage account to store audio files. You need to create a storage account and a blob container before connecting the tool.</p>
+<ol>
+<li>In the <a data-linktype="external" href="https://portal.azure.com">Azure portal</a>, create a new <strong>Azure Storage account</strong> (or use an existing one).</li>
+<li>In the storage account, expand <strong>Data storage</strong> and select <strong>Containers</strong>.</li>
+<li>Create a new container (for example, named <strong>files</strong>) to store the audio files your agent generates and reads.</li>
+<li>Generate a <strong>SAS token</strong> for the container with the following permissions: Read, Add, Create, Write, and List. Set the expiry time to the shortest practical duration.</li>
+</ol>
+<div class="IMPORTANT">
+<p>Important</p>
+<p>Copy the generated SAS URL and store it securely — you need it when connecting the Speech MCP server.</p>
+</div>
+<h2 id="create-a-foundry-project-and-agent">Create a Foundry project and agent</h2>
+<p>To use the Azure Speech MCP server, you need a Microsoft Foundry project with a deployed model.</p>
+<ol>
+<li><p>In the <a data-linktype="external" href="https://ai.azure.com">Microsoft Foundry portal</a>, create a new project (or use an existing one).</p>
+</li>
+<li><p>Deploy a model (such as <strong>gpt-4.1</strong>) that your agent will use for reasoning and generating responses.</p>
+</li>
+<li><p>Create an agent and give it instructions that describe its purpose. For example:</p>
+<pre><code>You are an AI agent that uses the Azure AI Speech tool to transcribe and generate speech.
+</code></pre>
+</li>
+</ol>
+<p>The agent is now ready to receive tool connections.</p>
+<h2 id="connect-the-azure-speech-mcp-server">Connect the Azure Speech MCP server</h2>
+<p>You connect the Azure Speech MCP server to your agent through the <strong>Tools</strong> page in the Foundry portal.</p>
+<ol>
+<li><p>In the navigation pane, select the <strong>Tools</strong> page.</p>
+</li>
+<li><p>Select <strong>Connect a tool</strong> and choose <strong>Azure Speech in Foundry Tools</strong> from the catalog.</p>
+</li>
+<li><p>Configure the connection with the following settings:</p>
+<ul>
+<li><strong>Foundry resource name</strong>: The name of your Foundry resource (for example, <code>myproject-resource</code>).</li>
+<li><strong>Bearer</strong> (<code>Ocp-Apim-Subscription-Key</code>): The key for your Foundry project.</li>
+<li><strong>X-Blob-Container-Url</strong>: The SAS URL for your blob container.</li>
+</ul>
+</li>
+<li><p>Wait for the connection to be created, then select <strong>Use in an agent</strong> and choose your agent.</p>
+</li>
+</ol>
+<p><span class="mx-imgBorder">
+<img alt="Screenshot of the Tools catalog in the Foundry portal showing the Azure Speech in Foundry Tools connection configuration." data-linktype="relative-path" src="https://learn.microsoft.com/en-us/training/wwl-data-ai/develop-speech-agent-speech-mcp/media/azure-speech-tool-config.png"/>
+</span>
+</p>
+<p>The agent now has access to the speech-to-text and text-to-speech tools exposed by the Azure Speech MCP server.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>You can find the project key on the project home page in the Foundry portal.</p>
+</div>
+<h2 id="test-in-the-agent-playground">Test in the agent playground</h2>
+<p>The agent playground in the Foundry portal provides an interactive environment for testing your agent.</p>
+<h3 id="test-text-to-speech">Test text-to-speech</h3>
+<p>Enter a prompt that asks the agent to generate speech:</p>
+<pre><code>Generate "To be or not to be, that is the question." as speech
+</code></pre>
+<p>The first time the agent uses the Speech MCP tool, you're prompted to <strong>approve</strong> the tool usage. You can select <strong>Always approve all Azure Speech MCP Server tools</strong> to skip future approval prompts.</p>
+<p>The response includes a link to the generated audio file saved in your blob container. Select the link to listen to the synthesized speech.</p>
+<h3 id="test-speech-to-text">Test speech-to-text</h3>
+<p>Enter a prompt that asks the agent to transcribe an audio file. You can use a publicly accessible URL or a SAS URL pointing to a file in your blob container:</p>
+<pre><code>Transcribe the file at https://example.com/audio/meeting-recording.wav
+</code></pre>
+<p>The agent calls the speech-to-text tool and returns the transcribed text.</p>
+<h3 id="customizing-speech-output">Customizing speech output</h3>
+<p>The Speech MCP tools support several options you can specify in your prompts:</p>
+<ul>
+<li><strong>Voice selection</strong>: Specify a neural voice, such as <code>en-GB-SoniaNeural</code> or <code>en-US-JennyNeural</code>.</li>
+<li><strong>Language</strong>: Specify the language for recognition or synthesis (for example, <code>es-ES</code> for Spanish).</li>
+<li><strong>Phrase hints</strong>: Provide domain-specific terms to improve transcription accuracy (for example, "Azure, OpenAI, Cognitive Services").</li>
+<li><strong>Profanity filtering</strong>: Request <code>masked</code>, <code>removed</code>, or <code>raw</code> profanity handling during transcription.</li>
+</ul>
+<p>For example:</p>
+<pre><code>Synthesize "Better a witty fool, than a foolish wit!" as speech using the voice "en-GB-SoniaNeural".
+</code></pre>
+<h2 id="build-a-client-application">Build a client application</h2>
+<p>While the agent playground is useful for testing, you typically want to build a client application that uses the agent programmatically. The Microsoft Foundry SDK supports this through the OpenAI Responses API.</p>
+<p>To build a client application, you use the <code>azure-ai-projects</code> and <code>azure-identity</code> packages. The general pattern is:</p>
+<ol>
+<li>Create an <code>AIProjectClient</code> using your Foundry project endpoint and <code>DefaultAzureCredential</code> (which uses your Azure CLI credentials in development).</li>
+<li>Get an OpenAI client from the project client by calling <code>get_openai_client()</code>.</li>
+<li>Call <code>responses.create()</code> to send a user prompt to the agent.</li>
+</ol>
+<p>The key part is how you reference the agent — you specify it by name in the <code>extra_body</code> parameter:</p>
+<pre><code class="lang-python">response = openai_client.responses.create(
+    input=[{"role": "user", "content": user_prompt}],
+    extra_body={
+        "agent_reference": {
+            "name": "Speech-Agent",
+            "type": "agent_reference"
+        }
+    },
+)
+
+print(response.output_text)
+</code></pre>
+<p>The agent processes the prompt, calls the appropriate Speech MCP tool, and returns the result in <code>output_text</code>. For text-to-speech requests, the output includes a link to the generated audio file in your blob container.</p>
+<h3 id="connect-the-mcp-server-in-code">Connect the MCP server in code</h3>
+<p>Instead of connecting the Azure Speech MCP server through the Foundry portal, you can define the MCP tool connection directly in code when you create an agent. Use the <code>MCPTool</code> class from the <code>azure-ai-projects</code> SDK:</p>
+<pre><code class="lang-python">from azure.ai.projects.models import MCPTool
+
+mcp_tool = MCPTool(
+    server_label="azure-speech",
+    server_url="https://{foundry-resource-name}.cognitiveservices.azure.com/speech/mcp",
+    require_approval="always",
+)
+</code></pre>
+<p>You then pass the <code>mcp_tool</code> when creating the agent through the SDK. This approach is useful when you want to manage tool connections as part of your application code rather than configuring them manually in the portal.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>4. Summary</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/06-summary">https://learn.microsoft.com/en-us/training/modules/develop-speech-agent-speech-mcp/06-summary</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Summary</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The Azure Speech MCP server connects AI agents to speech-to-text and text-to-speech capabilities through the Model Context Protocol. In this module, you learned how to use this server to build an agent that can transcribe audio and generate speech.</p>
+<p>In this module, you learned how to:</p>
+<ul>
+<li>Describe the Azure Speech MCP server and the speech capabilities it exposes.</li>
+<li>Explain how MCP enables dynamic tool discovery and selection by AI agents.</li>
+<li>Set up Azure Blob Storage for audio file input and output.</li>
+<li>Connect the Azure Speech MCP server to an agent in Microsoft Foundry.</li>
+<li>Build a Python client application that invokes an agent with speech tools using the Foundry SDK.</li>
+</ul>
+</div>
+<h2 id="learn-more">Learn more</h2>
+<ul>
+<li><a data-linktype="absolute-path" href="/en-us/azure/developer/azure-mcp-server/tools/ai-services-speech">Azure Speech in Foundry Tools for the Azure MCP Server</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/azure/foundry/agents/how-to/tools/model-context-protocol">Connect to Model Context Protocol servers</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/python/api/overview/azure/ai-projects-readme">Azure AI Projects SDK for Python</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/azure/ai-services/speech-service/overview">Azure Speech service overview</a></li>
+</ul>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+</body>
+</html>

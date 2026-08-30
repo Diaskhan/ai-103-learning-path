@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Develop a generative AI chat app with Microsoft Foundry</title>
+    <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #0078d4; border-bottom: 2px solid #0078d4; padding-bottom: 10px; }
+    h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0px; margin-bottom: 0px; }
+    .section { margin-bottom: 40px; }
+    .section-header { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .section-header a { color: #0078d4; text-decoration: none; }
+    .section-header a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    pre { background: #f4f4f4; padding: 15px; overflow-x: auto; border-radius: 5px; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .NOTE, .TIP, .IMPORTANT { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid; }
+    .IMPORTANT { background-color: #e7f3ff; border-color: #0078d4; }
+    .IMPORTANT > p:first-child { font-weight: bold; color: #0078d4; margin-top: 0; }
+    .TIP { background-color: #e8f5e9; border-color: #4caf50; }
+    .TIP > p:first-child { font-weight: bold; color: #2e7d32; margin-top: 0; }
+    .NOTE { background-color: #f3e5f5; border-color: #9c27b0; }
+    .NOTE > p:first-child { font-weight: bold; color: #7b1fa2; margin-top: 0; }
+</style>
+</head>
+<body>
+    <h1>Develop a generative AI chat app with Microsoft Foundry</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>1. Introduction</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/01-introduction">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/01-introduction</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Introduction</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Developers creating AI solutions with Microsoft Foundry need to work with a combination of services and software frameworks. When developing a generative AI chat application, you can choose from a range of options to write the code needed to build effective AI apps on Azure.</p>
+<p>In this module, you'll learn how to choose the appropriate endpoint, SDK, authentication, and chat API options to build a generative AI chat application.</p>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>We recognize that different people like to learn in different ways. You can choose to complete this module in video-based format or you can read the content as text and images. The text contains greater detail than the videos, so in some cases you might want to refer to it as supplemental material to the video presentation.</p>
+</div>
+
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>2. Explore with the model playground</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/02-chat-playground">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/02-chat-playground</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Explore with the model playground</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Before you write code to build a generative AI chat application, it's helpful to explore what your project can do through the Foundry portal. The portal provides interactive tools for testing models and generating code samples that you can use as starting points for your applications.</p>
+<p><a data-linktype="relative-path" href="../../wwl-data-ai/foundry-sdk/media/foundry-playground.png#lightbox"><img alt="Screenshot of the Model playground in Microsoft Foundry portal." data-linktype="relative-path" src="https://learn.microsoft.com/en-us/training/wwl-data-ai/foundry-sdk/media/foundry-playground.png"/></a></p>
+<h2 id="exploring-with-the-model-playground">Exploring with the Model playground</h2>
+<p>The <strong>Model playground</strong> in the Foundry portal provides an interactive environment for testing models before you write any code. You can access it by selecting <strong>Model playground</strong> from the left navigation.</p>
+<p>The playground lets you:</p>
+<ul>
+<li>Send prompts to deployed models and see responses in real time</li>
+<li>Adjust settings like temperature and max tokens</li>
+<li>Add system messages to customize model behavior</li>
+<li>Experiment with different models and configurations</li>
+</ul>
+<p>This no-code environment helps you understand how models respond to different inputs and settings, making it easier to design your application.</p>
+<h2 id="generating-code-samples">Generating code samples</h2>
+<p>One of the most useful features of the Model playground is the <strong>Code</strong> button in the chat pane. At any point during your experimentation, you can select this button to see code samples to reproduce a chat session in your app.</p>
+<p>The generated code samples include choices for:</p>
+<ul>
+<li><strong>API</strong> - Using Responses API, or another API like ChatCompletions</li>
+<li><strong>Language</strong> - Select your preferred programming language</li>
+<li><strong>SDK</strong> - Choose which SDK you want to see a sample of</li>
+</ul>
+<p>These samples are pre-populated with your project endpoint, model deployment name, and current settings. They provide a ready-to-use starting point for building your application.</p>
+<p>You can copy this code directly into your development environment and modify it to fit your needs.</p>
+<h2 id="from-playground-to-code">From playground to code</h2>
+<p>The typical workflow for building an AI application with Microsoft Foundry looks like this:</p>
+<ol>
+<li><strong>Explore in the playground</strong> - Test prompts, adjust settings, and find what works</li>
+<li><strong>Generate code samples</strong> - Use the <strong>Code</strong> tab to get SDK samples</li>
+<li><strong>Develop your application</strong> - Take the generated code and customize it for your specific needs</li>
+<li><strong>Iterate and refine</strong> - Return to the playground to test new ideas, then update your code</li>
+</ol>
+<p>This approach lets you quickly prototype and validate your ideas before investing time in development.</p>
+<p>In the next unit, you'll learn about the available endpoints and SDKs you can use to develop a client application.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>3. Choose an endpoint and SDK</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/03-microsoft-foundry-sdk">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/03-microsoft-foundry-sdk</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Choose an endpoint and SDK</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Microsoft Foundry provides flexibility for developing generative AI chat applications. Before you start development, it's important to understand the options that are available, and how to decide which of them to use. Some considerations for developing an application include:</p>
+<ul>
+<li><strong>Endpoints</strong>: Microsoft Foundry projects provide two endpoints that you can use to connect to and consume project assets, such as model deployments, from client applications. Each project has both a <em>Project endpoint</em> and an <em>Azure OpenAI endpoint</em>.</li>
+<li><strong>Client SDK</strong>: Depending on the endpoint you select, you can choose to use the <em>Microsoft Foundry SDK</em> or the <em>OpenAI SDK</em> to develop a generative AI chat application. Both SDKs support an OpenAI API compatible client object that can submit prompts to models, but there are some differences in the specific functionality available in each SDK.</li>
+<li><strong>Authentication</strong>: Depending on the endpoint and SDK you choose to use, there are multiple ways a client application can be authenticated by Foundry in order to be granted access to assets. In general, production applications should use <em>Microsoft Entra ID</em> authentication, which requires the application to be running in the context of a specific identity; but in some scenarios you can also use <em>key-based</em> or <em>token-based</em> authentication.</li>
+<li><strong>Chat API</strong>: The OpenAI client API supports two chat APIs: <em>ChatCompletions</em> and <em>Responses</em>. While the <em>Responses</em> API is recommended for most new development projects, the <em>ChatCompletions</em> API is well-established and compatible across many generative AI models and platforms.</li>
+</ul>
+<p>Let's start by considering the available endpoints, client SDKs, and authentication methods - we'll explore the Responses and ChatCompletions APIs later.</p>
+<h2 id="using-the-foundry-sdk-with-the-project-endpoint">Using the Foundry SDK with the project endpoint</h2>
+<p>The Microsoft Foundry SDK provides programmatic access to resources in your projects through a REST API and language-specific client libraries; including:</p>
+<ul>
+<li><a data-linktype="external" href="https://pypi.org/project/azure-ai-projects?azure-portal=true">Azure AI Projects for Python</a></li>
+<li><a data-linktype="external" href="https://www.nuget.org/packages/Azure.AI.Projects?azure-portal=true">Azure AI Projects for Microsoft .NET</a></li>
+<li><a data-linktype="external" href="https://www.npmjs.com/package/@azure/ai-projects?azure-portal=true">Azure AI Projects for JavaScript</a></li>
+</ul>
+<div class="NOTE">
+<p>Note</p>
+<p>This module uses Python code examples for common tasks. You can refer to the language-specific SDK documentation for equivalent code in your preferred language. Each SDK is developed and maintained independently, so some functionality may be at different stages of implementation.</p>
+</div>
+<h3 id="installing-the-sdk">Installing the SDK</h3>
+<p>To use the Azure AI Projects library in Python, install the <strong>azure-ai-projects</strong> package from PyPI along with supporting packages:</p>
+<pre><code class="lang-bash">pip install azure-ai-projects azure-identity openai
+</code></pre>
+<div class="NOTE">
+<p>Note</p>
+<p>When using the Foundry SDK to develop a chat application, you also need to import the OpenAI SDK package - the chat client functionality in the Foundry SDK is derived from the OpenAI SDK.</p>
+</div>
+<h3 id="connecting-to-the-project-endpoint">Connecting to the project endpoint</h3>
+<p>Each Foundry project has a unique endpoint that you can find on the project's <strong>Overview</strong> page in the Foundry portal at <a data-linktype="external" href="https://ai.azure.com?azure-portal=true">https://ai.azure.com</a>.</p>
+<p>The project endpoint follows this format:</p>
+<pre><code>https://{resource-name}.services.ai.azure.com/api/projects/&lt;project-name&gt;
+</code></pre>
+<p>Use this endpoint to create an <strong>AIProjectClient</strong> object:</p>
+<pre><code class="lang-python">from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+
+project_endpoint = "https://{resource-name}.services.ai.azure.com/api/projects/&lt;project-name&gt;"
+project_client = AIProjectClient(
+    credential=DefaultAzureCredential(),
+    endpoint=project_endpoint
+)
+</code></pre>
+<div class="NOTE">
+<p>Note</p>
+<p>The code uses default Azure credentials to authenticate. To enable this authentication, you need to install the <strong>azure-identity</strong> package (shown in the installation command earlier).</p>
+</div>
+<div class="TIP">
+<p>Tip</p>
+<p>To access the project successfully, the code must run in an authenticated Azure session. For example, you can use the Azure CLI <code>az login</code> command to sign in before running the code.</p>
+</div>
+<p>The project client (<code>AIProjectClient</code>) provides access to Foundry-native operations that don't have OpenAI equivalents. Use the project client to:</p>
+<ul>
+<li>Retrieve resource connections</li>
+<li>Access project configuration</li>
+<li>Enable tracing</li>
+<li>Manage datasets and indexes</li>
+</ul>
+<h3 id="creating-a-chat-client">Creating a chat client</h3>
+<p>To chat with a model in your Foundry project, you need an OpenAI-compatible client object. You can use the <strong>get_openai_client()</strong> method of the project client to get one, like this:</p>
+<pre><code class="lang-python">openai_client = project_client.get_openai_client(api_version="2024-10-21")
+</code></pre>
+<p>You can then use this chat client object to submit prompts to models and return responses.</p>
+<h2 id="using-the-openai-sdk-with-the-azure-openai-endpoint">Using the OpenAI SDK with the Azure OpenAI endpoint</h2>
+<p>The OpenAI SDK is the official client library for calling the OpenAI API. It handles HTTP requests, authentication, retries, and response parsing. The SDK works with OpenAI-hosted models, Azure OpenAI deployments, and Foundry models using the same patterns.</p>
+<h3 id="installing-the-sdk-1">Installing the SDK</h3>
+<p>To use the OpenAI library in Python, install the <strong>openai</strong> package from PyPI along with supporting packages:</p>
+<pre><code class="lang-bash">pip install openai azure-identity
+</code></pre>
+<div class="NOTE">
+<p>Note</p>
+<p>The <em>azure-identity</em> package is required if you intend to use token-based authentication to connect to the endpoint using Microsoft Entra ID credentials.</p>
+</div>
+<h3 id="connecting-to-the-azure-openai-endpoint">Connecting to the Azure OpenAI endpoint</h3>
+<p>Each Foundry project includes an Azure OpenAI endpoint that you can find on the project's <strong>Overview</strong> page in the Foundry portal at <a data-linktype="external" href="https://ai.azure.com?azure-portal=true">https://ai.azure.com</a>.</p>
+<p>The Azure OpenAI endpoint follows this format:</p>
+<pre><code>https://{resource-name}.openai.azure.com/openai/v1
+</code></pre>
+<p>Create an OpenAI client with your endpoint and Azure credentials:</p>
+<pre><code class="lang-python">from openai import OpenAI
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(), "https://ai.azure.com/.default"
+)
+
+openai_client = OpenAI(  
+  base_url = "https://{resource-name}.openai.azure.com/openai/v1/",  
+  api_key=token_provider,
+)
+</code></pre>
+<p>In addition to Microsoft Entra ID (recommended), you can authenticate using an API key or environment variables.</p>
+<p><strong>API key authentication:</strong></p>
+<pre><code class="lang-python">import os
+from openai import OpenAI
+
+openai_client = OpenAI(
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    base_url="https://{resource-name}.openai.azure.com/openai/v1/"
+)
+</code></pre>
+<div class="IMPORTANT">
+<p>Important</p>
+<p>Use API keys with caution. Store them securely in Azure Key Vault and never include them directly in your code.</p>
+</div>
+<p><strong>Environment variables:</strong></p>
+<p>If you set <code>OPENAI_BASE_URL</code> and <code>OPENAI_API_KEY</code> environment variables, the client uses them automatically:</p>
+<pre><code class="lang-python">from openai import OpenAI
+
+openai_client = OpenAI()  # Uses environment variables
+</code></pre>
+<p>Regardless of how you choose to authenticate, the <strong>OpenAI</strong> client handles model inference operations. Use it for:</p>
+<ul>
+<li>Generating responses with the Responses API</li>
+<li>Chat completions and image generation</li>
+<li>Accessing Foundry direct models (non-Azure OpenAI models)</li>
+</ul>
+<p><strong>Using an <em>AzureOpenAI</em> client object</strong></p>
+<p>You should generally use the <strong>OpenAI</strong> client object to chat with models through the Azure OpenAI v1 endpoint. However, you also have the option to create an <strong>AzureOpenAI</strong> client object if you need to use functionality from a specific version of the Azure OpenAI API. To create an <strong>AzureOpenAI</strong> client object, you must specify the API version and the Azure endpoint, like this:</p>
+<pre><code class="lang-python">import os
+from openai import AzureOpenAI
+
+openai_client = AzureOpenAI(
+    azure_endpoint = "https://{resource-name}.openai.azure.com"
+    api_key=os.getenv("AZURE_OPENAI_KEY"),  
+    api_version="2024-10-21",
+)
+</code></pre>
+<h2 id="choosing-between-the-foundry-sdk-and-openai-sdk">Choosing between the Foundry SDK and OpenAI SDK</h2>
+<p>Microsoft Foundry supports two approaches for building AI applications. Each serves different purposes, and understanding when to use each one helps you build the right solution.</p>
+<h3 id="when-to-use-the-foundry-sdk">When to use the Foundry SDK</h3>
+<p>Use the Foundry SDK when your application needs Foundry-specific capabilities:</p>
+<ul>
+<li><strong>Foundry Agent Service</strong> for building and managing AI agents</li>
+<li><strong>Tool invocation and approval</strong> workflows</li>
+<li><strong>Cloud evaluations</strong> for testing and validating AI responses</li>
+<li><strong>Tracing and observability</strong> for monitoring application behavior</li>
+<li><strong>Foundry direct models</strong> (non-Azure OpenAI models available through the model catalog)</li>
+<li><strong>Project metadata, connections, and governance</strong> features</li>
+</ul>
+<p>Microsoft recommends the Foundry SDK when building apps with agents, evaluations, or Foundry-specific features.</p>
+<h3 id="when-to-use-the-openai-sdk">When to use the OpenAI SDK</h3>
+<p>Use the OpenAI SDK when you need maximum compatibility with the OpenAI API:</p>
+<ul>
+<li><strong>Full OpenAI API compatibility</strong> for existing code and tooling</li>
+<li><strong>Portability</strong> between OpenAI and Azure OpenAI deployments</li>
+<li><strong>Chat Completions, Responses, and Images</strong> APIs</li>
+<li><strong>Minimal dependency</strong> on Foundry-specific concepts</li>
+</ul>
+<p>The OpenAI SDK is ideal for model inference workloads where you want existing OpenAI code to work with minimal changes. However, this approach doesn't provide Foundry-specific features like agents or evaluations.</p>
+<p>Microsoft Foundry gives you flexibility in how you build AI applications. Use the Foundry SDK with <code>AIProjectClient</code> when you need project-level features like agents, evaluations, tracing, and connections. Use the OpenAI SDK when you need straightforward model inference with maximum OpenAI compatibility. Both SDKs work with your Foundry project endpoint, so you can combine them as needed in your applications. You can also use both SDKs together in the same application—the Foundry SDK for project features and the OpenAI SDK for model inference.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>4. Generate responses with the Responses API</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/04-responses-api">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/04-responses-api</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Generate responses with the Responses API</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The OpenAI <em>Responses</em> API brings together capabilities from two previously separate APIs (<em>ChatCompletions</em> and <em>Assistants</em>) in a unified experience. It provides stateful, multi-turn response generation, making it ideal for conversational AI applications. You can access the Responses API through an OpenAI-compatible client using either the Foundry SDK or the OpenAI SDK.</p>
+<h2 id="understanding-the-responses-api">Understanding the Responses API</h2>
+<p>The <em>Responses</em> API offers several advantages over traditional chat completions:</p>
+<ul>
+<li><strong>Stateful conversations</strong>: Maintains conversation context across multiple turns</li>
+<li><strong>Unified experience</strong>: Combines chat completions and Assistants API patterns</li>
+<li><strong>Foundry direct models</strong>: Works with models hosted directly in Microsoft Foundry, not just Azure OpenAI models</li>
+<li><strong>Simple integration</strong>: Access through the OpenAI-compatible client</li>
+</ul>
+<div class="NOTE">
+<p>Note</p>
+<p>The <em>Responses</em> API is the recommended approach for generating AI responses in Microsoft Foundry applications. It replaces the older <em>ChatCompletions</em> API for most scenarios.</p>
+</div>
+<h2 id="generating-a-simple-response">Generating a simple response</h2>
+<p>With an OpenAI-compatible client, you can generate responses using the <strong>responses.create()</strong> method:</p>
+<pre><code class="lang-python"># Generate a response using the OpenAI-compatible client
+response = openai_client.responses.create(
+    model="gpt-4.1",  # Your model deployment name
+    input="What is Microsoft Foundry?"
+)
+
+# Display the response
+print(response.output_text)
+</code></pre>
+<p>The <strong>input</strong> parameter accepts a text string containing your prompt. The model generates a response based on this input.</p>
+<h2 id="understanding-response-structure">Understanding response structure</h2>
+<p>A response object contains several useful properties:</p>
+<ul>
+<li><strong>output_text</strong>: The generated text response</li>
+<li><strong>id</strong>: Unique identifier for this response</li>
+<li><strong>status</strong>: Response status (for example, "completed")</li>
+<li><strong>usage</strong>: Token usage information (input, output, and total tokens)</li>
+<li><strong>model</strong>: The model used to generate the response</li>
+</ul>
+<p>You can access these properties to handle responses effectively:</p>
+<pre><code class="lang-python">response = openai_client.responses.create(
+    model="gpt-4.1",
+    input="Explain machine learning in simple terms."
+)
+
+print(f"Response: {response.output_text}")
+print(f"Response ID: {response.id}")
+print(f"Tokens used: {response.usage.total_tokens}")
+print(f"Status: {response.status}")
+</code></pre>
+<h3 id="adding-instructions">Adding instructions</h3>
+<p>In addition to the user <em>input</em>, you can provide <em>instructions</em> (often referred to as a <em>system prompt</em>) to guide the model's behavior:</p>
+<pre><code class="lang-python">response = client.responses.create(
+    model="gpt-4.1",
+    instructions="You are a helpful AI assistant that answers questions clearly and concisely.",
+    input="Explain neural networks."
+)
+
+print(response.output_text)
+</code></pre>
+<h2 id="controlling-response-generation">Controlling response generation</h2>
+<p>You can control response generation with additional parameters:</p>
+<pre><code class="lang-python">response = openai_client.responses.create(
+    model="gpt-4.1",
+    instructions="You are a helpful AI assistant that answers questions clearly and concisely.",
+    input="Write a creative story about AI.",
+    temperature=0.8,  # Higher temperature for more creativity
+    max_output_tokens=200  # Limit response length
+)
+
+print(response.output_text)
+</code></pre>
+<ul>
+<li><strong>temperature</strong>: Controls randomness (0.0-2.0). Higher values make output more creative and varied</li>
+<li><strong>max_output_tokens</strong>: Limits the maximum number of tokens in the response</li>
+<li><strong>top_p</strong>: Alternative to temperature for controlling randomness</li>
+</ul>
+<h2 id="working-with-foundry-direct-models">Working with Foundry direct models</h2>
+<p>When using the FoundrySDK or AzureOpenAI client to connect to a <em>project</em> endpoint, the Responses API works with both Azure OpenAI models and Foundry direct models (such as Microsoft Phi, DeepSeek, or other models hosted directly in Microsoft Foundry):</p>
+<pre><code class="lang-python"># Using a Foundry direct model
+response = openai_client.responses.create(
+    model="microsoft-phi-4",  # Example Foundry direct model
+    instructions="You are a helpful AI assistant that answers questions clearly and concisely.",
+    input="What are the benefits of small language models?"
+)
+
+print(response.output_text)
+</code></pre>
+<h2 id="creating-conversational-experiences">Creating conversational experiences</h2>
+<p>For more complex conversational scenarios, you can provide system instructions and build multi-turn conversations:</p>
+<pre><code class="lang-python"># First turn in the conversation
+response1 = openai_client.responses.create(
+    model="gpt-4.1",
+    instructions="You are a helpful AI assistant that explains technology concepts clearly.",
+    input="What is machine learning?"
+)
+
+print("Assistant:", response1.output_text)
+
+# Continue the conversation
+response2 = openai_client.responses.create(
+    model="gpt-4.1",
+    instructions="You are a helpful AI assistant that explains technology concepts clearly.",
+    input="Can you give me an example?",
+    previous_response_id=response1.id
+)
+
+print("Assistant:", response2.output_text)
+</code></pre>
+<p>In reality, the implementation is likely to be constructed as a loop in which a user can interactively enter messages based on each response received from the model:</p>
+<pre><code class="lang-python"># Track responses
+last_response_id = None
+
+# Loop until the user wants to quit
+print("Assistant: Enter a prompt (or type 'quit' to exit)")
+while True:
+    input_text = input('\nYou: ')
+    if input_text.lower() == "quit":
+        print("Assistant: Goodbye!")
+        break
+
+    # Get a response
+    response = openai_client.responses.create(
+                model=model_name,
+                instructions="You are a helpful AI assistant that explains technology concepts clearly.",
+                input=input_text,
+                previous_response_id=last_response_id
+    )
+    assistant_text = response.output_text
+    print("\nAssistant:", assistant_text)
+    last_response_id = response.id 
+</code></pre>
+<p>The output from this example looks similar to this:</p>
+<pre><code class="lang-text">Assistant: Enter a prompt (or type 'quit' to exit)
+
+You: What is machine learning?
+
+Assistant: Machine learning is a type of artificial intelligence (AI) that enables computers to learn from data and improve their performance over time without being explicitly programmed. It involves training algorithms on large datasets to recognize patterns, make predictions, or take actions based on those patterns. This allows machines to become more accurate and efficient in their tasks as they are exposed to more data.
+
+You: Can you give me an example?
+
+Assistant: Certainly! Let's look at a simple example of supervised learning—predicting house prices based on features like size, location, and number of rooms.
+Imagine you want to build a machine learning model that can predict the price of a house based on various factors.
+...
+    { the example provided in the model response may be extensive}
+...
+
+You: quit
+
+Assistant: Goodbye!
+</code></pre>
+<p>As the user enters new input in each turn, the data sent to the model includes the <em>Instructions</em> system message, the <em>input</em> from the user, and the <em>previous</em> response received from the model. In this way, the new input is grounded in the context provided by the response the model generated for the previous input.</p>
+<h3 id="alternative-manual-conversation-chaining">Alternative: Manual conversation chaining</h3>
+<p>You can manage conversations manually by building the message history yourself. This approach gives you more control over what context is included:</p>
+<pre><code class="lang-python">try:
+    # Start with initial message
+    conversation_history = [
+        {
+            "type": "message",
+            "role": "user",
+            "content": "What is machine learning?"
+        }
+    ]
+
+    # First response
+    response1 = openai_client.responses.create(
+        model="gpt-4.1",
+        input=conversation_history
+    )
+
+    print("Assistant:", response1.output_text)
+
+    # Add assistant response to history
+    conversation_history += response1.output
+
+    # Add new user message
+    conversation_history.append({
+        "type": "message",
+        "role": "user", 
+        "content": "Can you give me an example?"
+    })
+
+    # Second response with full history
+    response2 = openai_client.responses.create(
+        model="gpt-4.1",
+        input=conversation_history
+    )
+
+    print("Assistant:", response2.output_text)
+
+except Exception as ex:
+    print(f"Error: {ex}")
+</code></pre>
+<p>This manual approach is useful when you need to:</p>
+<ul>
+<li>Customize which messages are included in context</li>
+<li>Implement conversation pruning to manage token limits</li>
+<li>Store and restore conversation history from a database</li>
+</ul>
+<h3 id="retrieving-specific-previous-responses">Retrieving specific previous responses</h3>
+<p>The Responses API maintains response history, allowing you to retrieve previous responses:</p>
+<pre><code class="lang-python">try:   
+
+    # Retrieve a previous response
+    response_id = "resp_67cb61fa3a448190bcf2c42d96f0d1a8"  # Example ID
+    previous_response = openai_client.responses.retrieve(response_id)
+
+    print(f"Previous response: {previous_response.output_text}")
+
+except Exception as ex:
+    print(f"Error: {ex}")
+</code></pre>
+<h3 id="context-window-considerations">Context window considerations</h3>
+<p>The <strong>previous_response_id</strong> parameter links responses together, maintaining conversation context across multiple API calls.</p>
+<p>It's important to note that keeping conversation history can increase token usage. For a single run, the active context window can include:</p>
+<ul>
+<li>System instructions (instructions, safety rules)</li>
+<li>Your current prompt</li>
+<li>Conversation history (previous user + assistant messages)</li>
+<li>Tool schemas (functions, OpenAPI specs, MCP tools, etc.)</li>
+<li>Tool outputs (search results, code interpreter output, files)</li>
+<li>Retrieved memory or documents (from memory stores, RAG, file search)</li>
+</ul>
+<p>All of these are concatenated, tokenized, and sent to the model together on every request. The SDK helps you manage state, but it doesn't automatically make token usage cheaper.</p>
+<h2 id="creating-responsive-chat-apps">Creating responsive chat apps</h2>
+<p>Responses from a model can take some time to generate depending on factors like the specific model being used, the context window size, and the size of the prompt. User's may become frustrated if the app appears to "freeze" while waiting for a response, so it's important to consider app responsiveness in your implementation.</p>
+<h3 id="streaming-responses">Streaming responses</h3>
+<p>For long responses, you can use streaming to receive output incrementally - so the user sees partially complete responses as output becomes available:</p>
+<pre><code class="lang-python">stream = openai_client.responses.create(
+    model="gpt-4.1",
+    input="Write a short story about a robot learning to paint.",
+    stream=True
+)
+
+for event in stream:
+    print(event, end="", flush=True)
+</code></pre>
+<p>If you're tracking conversation history when streaming, you can get the response ID when the stream ends, like this:</p>
+<pre><code class="lang-python">stream = openai_client.responses.create(
+    model="gpt-4.1",
+    input="Write a short story about a robot learning to paint.",
+    stream=True
+)
+for event in stream:
+                if event.type == "response.output_text.delta":
+                    print(event.delta, end="")
+                elif event.type == "response.completed":
+                    response_id = event.response.id
+</code></pre>
+<h3 id="async-usage">Async usage</h3>
+<p>For high-performance applications, you can use an asynchronous client that allows you to make non-blocking API calls. Asynchronous usage is ideal for long-running requests or when you want to handle multiple requests concurrently without blocking your application. To use it, import <code>AsyncOpenAI</code> instead of <code>OpenAI</code> and use <code>await</code> with each API call:</p>
+<pre><code class="lang-python">import asyncio
+from openai import AsyncOpenAI
+
+client = AsyncOpenAI(
+    base_url="https://&lt;resource-name&gt;.openai.azure.com/openai/v1/",
+    api_key=token_provider,
+)
+
+async def main():
+    response = await client.responses.create(
+        model="gpt-4.1",
+        input="Explain quantum computing briefly."
+    )
+    print(response.output_text)
+
+asyncio.run(main())
+</code></pre>
+<p>Async streaming works the same way:</p>
+<pre><code class="lang-python">async def stream_response():
+    stream = await client.responses.create(
+        model="gpt-4.1",
+        input="Write a haiku about coding.",
+        stream=True
+    )
+
+    async for event in stream:
+        print(event, end="", flush=True)
+
+asyncio.run(stream_response())
+</code></pre>
+<p>By using the <em>Responses</em> API through the Microsoft Foundry SDK, you can build sophisticated conversational AI applications that maintain context, support multiple model types, and provide a responsive user experience.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>5. Generate responses with the ChatCompletions API</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/05-openai-api">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/05-openai-api</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Generate responses with the ChatCompletions API</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The OpenAI <em>ChatCompletions</em> API is commonly used across generative AI models and platforms. Although the <em>Responses</em> API is recommended for new project development, it's likely that you'll encounter scenarios where the <em>ChatCompletions</em> API is useful for code maintenance or cross-platform compatibility.</p>
+<h2 id="submitting-a-prompt">Submitting a prompt</h2>
+<p>The <em>ChatCompletions</em> API uses collections of <em>message</em> objects in JSON format to encapsulate prompts:</p>
+<pre><code class="lang-python">completion = openai_client.chat.completions.create(
+    model="gpt-4o",  # Your model deployment name
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": "When was Microsoft founded?"}
+    ]
+)
+
+print(completion.choices[0].message.content)
+</code></pre>
+<h2 id="retaining-conversational-context">Retaining conversational context</h2>
+<p>Unlike the <em>Responses</em> API, the <em>ChatCompletions</em> API doesn't provide a stateful response tracking feature. To retain conversational context, you must write code to manually track previous prompts and responses.</p>
+<pre><code class="lang-python"># Initial messages
+conversation_messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful AI assistant that answers questions and provides information."
+    }
+]
+
+# Add the first user message
+conversation_messages.append(
+    {"role": "user",
+    "content": "When was Microsoft founded?"}
+)
+
+# Get a completion
+completion = openai_client.chat.completions.create(
+    model="gpt-4o",
+    messages=conversation_messages
+)
+assistant_message = completion.choices[0].message.content
+print("Assistant:", assistant_text)
+
+# Append the response to the conversation
+conversation_messages.append(
+    {"role": "assistant", "content": assistant_text}
+)
+
+# Add the next user message
+conversation_messages.append(
+    {"role": "user",
+    "content": "Who founded it?"}
+)
+
+# Get a completion
+completion = openai_client.chat.completions.create(
+    model="gpt-4o",
+    messages=conversation_messages
+)
+assistant_message = completion.choices[0].message.content
+print("Assistant:", assistant_text)
+
+# and so on...
+</code></pre>
+<p>In a real application, the conversation is likely to be implemented in a loop; like this:</p>
+<pre><code class="lang-python"># Initial messages
+conversation_messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful AI assistant that answers questions and provides information."
+    }
+]
+
+# Loop until the user wants to quit
+print("Assistant: Enter a prompt (or type 'quit' to exit)")
+while True:
+    input_text = input('\nYou: ')
+    if input_text.lower() == "quit":
+        print("Assistant: Goodbye!")
+        break
+
+    # Add the user message
+    conversation_messages.append(
+        {"role": "user",
+        "content": input_text}
+    )
+
+    # Get a completion
+    completion = openai_client.chat.completions.create(
+        model="gpt-4o",
+        messages=conversation_messages
+    )
+    assistant_message = completion.choices[0].message.content
+    print("\nAssistant:", assistant_message)
+
+    # Append the response to the conversation
+    conversation_messages.append(
+        {"role": "assistant", "content": assistant_message}
+    )
+</code></pre>
+<p>The output from this example looks similar to this:</p>
+<pre><code class="lang-text">Assistant: Enter a prompt (or type 'quit' to exit)
+
+You: When was Microsoft founded?
+
+Assistant: Microsoft was founded on April 4, 1975 in Albuquerque, New Mexico, USA.
+
+You: Who founded it?
+
+Assistant: Microsoft was founded by Bill Gates and Paul Allen.
+
+You: quit
+
+Assistant: Goodbye!
+</code></pre>
+<p>Each new user prompt and completion is added to the conversation, and the entire conversation history is submitted in each turn.</p>
+<p>While not as fully featured as the <em>Responses</em> API, the <em>ChatCompletions</em> API is well established in the generative AI model ecosystem, so it's useful to be familiar with it.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>6. Summary</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/foundry-sdk/08-summary">https://learn.microsoft.com/en-us/training/modules/foundry-sdk/08-summary</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Summary</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Microsoft Foundry provides two SDKs for building AI applications. The Foundry SDK gives you access to project-level features like agents, evaluations, tracing, and connections. The OpenAI SDK provides model inference with full OpenAI API compatibility.</p>
+<h2 id="key-takeaways">Key takeaways</h2>
+<p>In this module, you learned how to:</p>
+<ul>
+<li><strong>Use the Foundry SDK</strong> with the Foundry project endpoint to access project configuration, connections, tracing, and datasets</li>
+<li><strong>Use the OpenAI SDK</strong> with the Foundry project and Azure OpenAI endpoints for model inferencing</li>
+<li><strong>Generate responses</strong> with the <em>Responses</em> and <em>ChatCompletions</em> APIs and manage conversations</li>
+</ul>
+</div>
+<h2 id="further-reading">Further reading</h2>
+<p>For more information about the topics discussed in this module, see the following resources:</p>
+<ul>
+<li><a data-linktype="absolute-path" href="/en-us/azure/ai-foundry/how-to/develop/sdk-overview">Microsoft Foundry SDK overview</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/azure/ai-foundry/openai/how-to/responses">Responses API documentation</a></li>
+<li><a data-linktype="external" href="https://aka.ms/azureaifoundry/discord">Microsoft Foundry Discord</a></li>
+<li><a data-linktype="external" href="https://aka.ms/azureaifoundry/forum">Microsoft Foundry Developer Forum</a></li>
+</ul>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+</body>
+</html>

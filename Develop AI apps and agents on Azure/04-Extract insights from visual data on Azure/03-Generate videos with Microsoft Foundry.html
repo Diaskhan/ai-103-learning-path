@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate videos with Microsoft Foundry</title>
+    <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #0078d4; border-bottom: 2px solid #0078d4; padding-bottom: 10px; }
+    h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0px; margin-bottom: 0px; }
+    .section { margin-bottom: 40px; }
+    .section-header { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .section-header a { color: #0078d4; text-decoration: none; }
+    .section-header a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    pre { background: #f4f4f4; padding: 15px; overflow-x: auto; border-radius: 5px; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .NOTE, .TIP, .IMPORTANT { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid; }
+    .IMPORTANT { background-color: #e7f3ff; border-color: #0078d4; }
+    .IMPORTANT > p:first-child { font-weight: bold; color: #0078d4; margin-top: 0; }
+    .TIP { background-color: #e8f5e9; border-color: #4caf50; }
+    .TIP > p:first-child { font-weight: bold; color: #2e7d32; margin-top: 0; }
+    .NOTE { background-color: #f3e5f5; border-color: #9c27b0; }
+    .NOTE > p:first-child { font-weight: bold; color: #7b1fa2; margin-top: 0; }
+</style>
+</head>
+<body>
+    <h1>Generate videos with Microsoft Foundry</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>1. Introduction</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/1-introduction">https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/1-introduction</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Introduction</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Generative AI has expanded beyond text and images to video creation. With Sora 2 in Microsoft Foundry, you can generate realistic and imaginative video scenes from text prompts, reference images, or by remixing existing videos.</p>
+<p>In this module, you'll learn how to deploy Sora 2, write effective prompts for video generation, and build a Python application that creates videos programmatically using the OpenAI SDK.</p>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>We recognize that different people like to learn in different ways. You can choose to complete this module in video-based format or you can read the content as text and images. The text contains greater detail than the videos, so in some cases you might want to refer to it as supplemental material to the video presentation.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>2. Deploy a video generating model</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/2-deploy-video-model">https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/2-deploy-video-model</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Deploy a video generating model</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>To generate videos from text prompts, you need to deploy a video generation model. <strong>Sora 2</strong> is an AI model from OpenAI that creates realistic and imaginative video scenes from text instructions, input images, or existing videos. Sora 2 is available in Microsoft Foundry and provides an all-in-one creative platform with superior video quality and intuitive controls.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before deploying a Sora 2 model, ensure you have:</p>
+<ul>
+<li>An Azure subscription</li>
+<li>Access to the Microsoft Foundry portal</li>
+<li>A Foundry project where you have permissions to deploy models</li>
+</ul>
+<h2 id="deploy-the-sora-2-model">Deploy the Sora 2 model</h2>
+<p>To deploy a Sora 2 video generation model in Microsoft Foundry:</p>
+<ol>
+<li>Go to the <a data-linktype="external" href="https://ai.azure.com">Microsoft Foundry portal</a> and sign in with your credentials.</li>
+<li>From the Foundry landing page, create or select a project.</li>
+<li>Select <strong>Build</strong> from the navigation pane on the right.</li>
+<li>Select <strong>Models</strong> from the left-hand menu to view the model catalog.</li>
+<li>Use the search bar or filter options to find the <strong>Sora-2</strong> video generation model.</li>
+<li>Select the <strong>Sora-2</strong> model then select <strong>Deploy</strong> and choose the appropriate deployment settings.</li>
+</ol>
+<div class="TIP">
+<p>Tip</p>
+<p>To learn more about available models in Microsoft Foundry, see the <strong><a data-linktype="absolute-path" href="/en-us/azure/ai-foundry/how-to/model-catalog-overview">Model catalog and collections in Microsoft Foundry portal</a></strong> article in the Microsoft Foundry documentation.</p>
+</div>
+<h2 id="sora-2-capabilities">Sora 2 capabilities</h2>
+<p>Sora 2 offers several powerful capabilities for video generation:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Text to video</strong></td>
+<td>Generate videos from natural language text prompts</td>
+</tr>
+<tr>
+<td><strong>Image to video</strong></td>
+<td>Transform existing images into video content</td>
+</tr>
+<tr>
+<td><strong>Video remix</strong></td>
+<td>Make targeted adjustments to existing videos without regenerating from scratch</td>
+</tr>
+<tr>
+<td><strong>Audio generation</strong></td>
+<td>Supports audio generation in output videos</td>
+</tr>
+<tr>
+<td><strong>Multiple resolutions</strong></td>
+<td>Supports portrait (720×1280) and landscape (1280×720) formats</td>
+</tr>
+<tr>
+<td><strong>Variable duration</strong></td>
+<td>Generate videos of 4, 8, or 12 seconds</td>
+</tr>
+</tbody>
+</table>
+<p>Sora 2 enables you to create realistic and imaginative video content from text prompts, reference images, or by remixing existing videos. After deploying the model through the Foundry portal, you can use it to generate videos in various resolutions and durations. The model's versatility and ease of use make it a powerful tool for video creation, whether you're starting from scratch or enhancing existing media.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>3. Generate video from a prompt</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/3-generate-video-from-prompt">https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/3-generate-video-from-prompt</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Generate video from a prompt</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Once your Sora 2 model is deployed, you can start generating videos. Video generation is an asynchronous process—you submit a request with your prompt and video settings, then retrieve the completed video when it's ready.</p>
+<h2 id="video-generation-parameters">Video generation parameters</h2>
+<p>Before crafting your prompt, understand the API parameters that control your video output:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Supported values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>prompt</strong></td>
+<td>Natural language description of your video</td>
+<td>Text string (required)</td>
+</tr>
+<tr>
+<td><strong>model</strong></td>
+<td>The model to use</td>
+<td><code>sora-2</code> or <code>sora-2-pro</code></td>
+</tr>
+<tr>
+<td><strong>size</strong></td>
+<td>Output resolution</td>
+<td><code>1280x720</code> (landscape), <code>720x1280</code> (portrait)</td>
+</tr>
+<tr>
+<td><strong>seconds</strong></td>
+<td>Video duration</td>
+<td><code>4</code>, <code>8</code>, or <code>12</code> (default: 4)</td>
+</tr>
+<tr>
+<td><strong>input_reference</strong></td>
+<td>Reference image for the first frame</td>
+<td>JPEG, PNG, or WebP file</td>
+</tr>
+<tr>
+<td><strong>remix_video_id</strong></td>
+<td>ID of a previous video to remix</td>
+<td>Video ID string</td>
+</tr>
+</tbody>
+</table>
+<div class="TIP">
+<p>Tip</p>
+<p>The model follows instructions more reliably in shorter clips. For best results, consider generating two 4-second clips and stitching them together rather than a single 8-second clip.</p>
+</div>
+<h2 id="test-video-generation-in-the-playground">Test video generation in the playground</h2>
+<p>After deploying the Sora 2 model, you can test it using the Video playground in Microsoft Foundry portal:</p>
+<p><img alt="Screenshot of the video playground." data-linktype="relative-path" src="https://learn.microsoft.com/en-us/training/wwl-data-ai/generate-video-with-foundry/media/video-playground.png"/></p>
+<ol>
+<li>Navigate to your deployed Sora 2 model in the Foundry portal.</li>
+<li>Select the <strong>Playground</strong> tab to access the video generation interface.</li>
+<li>Enter your prompt into the text box describing the video you want to generate.</li>
+<li>Configure video settings such as resolution and duration.</li>
+<li>Select <strong>Generate</strong> to start video creation.</li>
+</ol>
+<p>Video generation typically takes 1 to 5 minutes depending on your settings. When the AI-generated video is ready, it appears on the page.</p>
+<div class="NOTE">
+<p>Note</p>
+<p>The content generation APIs include a content moderation filter. If Azure OpenAI recognizes your prompt as harmful content, it won't return a generated video. For more information, see <a data-linktype="absolute-path" href="/en-us/azure/ai-services/openai/concepts/content-filter">Content filtering</a>.</p>
+</div>
+<p>In the video playground, you can also view cURL code samples that are prefilled according to your settings. Select the <strong>View code</strong> button at the top of the playground to access sample code you can use in your applications.</p>
+<h2 id="writing-effective-prompts">Writing effective prompts</h2>
+<p>Think of prompting like briefing a cinematographer. The more specific you are about what the shot should achieve, the more control and consistency you'll get. However, leaving some details open can lead to creative, unexpected results.</p>
+<h3 id="prompt-anatomy">Prompt anatomy</h3>
+<p>A clear prompt describes a shot as if you were sketching it onto a storyboard:</p>
+<ul>
+<li><strong>Camera framing</strong>: Specify the shot type (wide, medium, close-up) and angle</li>
+<li><strong>Subject description</strong>: Anchor your subject with distinctive details</li>
+<li><strong>Action</strong>: Describe movement in beats—small steps, gestures, or pauses</li>
+<li><strong>Lighting and palette</strong>: Set the mood with lighting direction and color anchors</li>
+<li><strong>Style</strong>: Establish the aesthetic early (for example, "1970s film" or "handheld documentary")</li>
+</ul>
+<h3 id="weak-vs-strong-prompts">Weak vs. strong prompts</h3>
+<table>
+<thead>
+<tr>
+<th>Weak prompt</th>
+<th>Strong prompt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"A beautiful street at night"</td>
+<td>"Wet asphalt, zebra crosswalk, neon signs reflecting in puddles"</td>
+</tr>
+<tr>
+<td>"Person moves quickly"</td>
+<td>"Cyclist pedals three times, brakes, and stops at crosswalk"</td>
+</tr>
+<tr>
+<td>"Cinematic look"</td>
+<td>"Anamorphic 2.0x lens, shallow DOF, volumetric light"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-prompt">Example prompt</h3>
+<p>Here's an example of a well-structured prompt:</p>
+<pre><code class="lang-text">In a 90s documentary-style interview, an old Swedish man sits in a study 
+and says, "I still remember when I was young."
+</code></pre>
+<p>This prompt works because:</p>
+<ul>
+<li>"90s documentary" sets the style, so the model chooses appropriate camera, lighting, and color</li>
+<li>"old Swedish man sits in a study" describes subject and setting while allowing creative interpretation</li>
+<li>The dialogue gives the model specific words to sync with the character</li>
+</ul>
+<h2 id="using-reference-images">Using reference images</h2>
+<p>For more control over composition and style, use the <code>input_reference</code> parameter to provide a visual reference. The model uses the image as an anchor for the first frame, while your prompt defines what happens next.</p>
+<p>Requirements for reference images:</p>
+<ul>
+<li>The image resolution must match the target video size (<code>1280x720</code> or <code>720x1280</code>)</li>
+<li>Supported formats: JPEG, PNG, WebP</li>
+</ul>
+<h2 id="remixing-existing-videos">Remixing existing videos</h2>
+<p>The remix feature lets you modify specific aspects of an existing video while preserving its core elements—scene transitions, visual layout, and overall structure. This is useful for making targeted adjustments without regenerating from scratch.</p>
+<p>To remix a video:</p>
+<ol>
+<li>Generate a video and note its video ID from the completed job</li>
+<li>Call the remix endpoint with the original video ID and an updated prompt</li>
+<li>Describe only the changes you want—keep modifications focused</li>
+</ol>
+<p>For best results:</p>
+<ul>
+<li>Limit changes to one clearly articulated adjustment</li>
+<li>Be specific about what to change: "same shot, switch to 85mm lens" or "same lighting, new palette: teal, sand, rust"</li>
+<li>Narrow, precise edits retain greater fidelity to the source material</li>
+</ul>
+<h2 id="tips-for-better-results">Tips for better results</h2>
+<ul>
+<li><strong>Keep it simple</strong>: Each shot should have one clear camera move and one clear subject action</li>
+<li><strong>Use beats for timing</strong>: Instead of "actor walks across the room," try "actor takes four steps to the window, pauses, and pulls the curtain"</li>
+<li><strong>Be consistent</strong>: Reuse phrasing for characters across shots to maintain continuity</li>
+<li><strong>Iterate</strong>: Small changes to camera, lighting, or action can shift outcomes dramatically—treat each generation as a creative variation</li>
+</ul>
+<p>Video generation with Sora 2 is a collaborative process. You provide direction, and the model delivers creative variations. Be prepared to experiment—sometimes the second or third generation is the best one.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>4. Generate video in Python</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/4-generate-video-in-python">https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/4-generate-video-in-python</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Generate video in Python</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>To build applications that generate videos programmatically, you can use the OpenAI Python SDK with your Sora 2 deployment in Microsoft Foundry. Video generation is an asynchronous process—you submit a job, poll for status, and download the result when it's ready.</p>
+<h2 id="generate-a-video">Generate a video</h2>
+<p>Video generation follows a three-step pattern: create the job, poll for completion, and download the result.</p>
+<pre><code class="lang-python">import time
+
+# Create the video generation job
+video = client.videos.create(
+    model="sora-2",
+    prompt="A robot walks through a rainy city street at dusk, neon signs reflecting in puddles",
+    size="1280x720",
+    seconds="4",
+)
+
+print(f"Video creation started. ID: {video.id}")
+
+# Poll for completion
+while video.status not in ["completed", "failed", "cancelled"]:
+    print(f"Status: {video.status}. Waiting...")
+    time.sleep(20)
+    video = client.videos.retrieve(video.id)
+
+# Download when complete
+if video.status == "completed":
+    content = client.videos.download_content(video.id, variant="video")
+    content.write_to_file("output.mp4")
+    print("Video saved to output.mp4")
+</code></pre>
+<h2 id="generate-video-from-a-reference-image">Generate video from a reference image</h2>
+<p>To use an image as a starting frame, pass it to the <code>input_reference</code> parameter. The image resolution must match the target video size:</p>
+<pre><code class="lang-python">video = client.videos.create(
+    model="sora-2",
+    prompt="The camera slowly pans across the landscape as clouds drift overhead",
+    size="1280x720",
+    seconds="4",
+    input_reference=open("landscape.png", "rb"),
+)
+</code></pre>
+<div class="NOTE">
+<p>Note</p>
+<p>Reference images containing human faces are currently rejected. Use images of landscapes, objects, or animated characters instead.</p>
+</div>
+<h2 id="remix-an-existing-video">Remix an existing video</h2>
+<p>To modify an existing video while preserving its structure, use the remix method with the original video's ID:</p>
+<pre><code class="lang-python">video = client.videos.remix(
+    video_id="video_abc123",
+    prompt="Change the color palette to warm sunset tones",
+)
+</code></pre>
+<h2 id="handle-job-states">Handle job states</h2>
+<p>Video jobs can return these status values:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>queued</code></td>
+<td>Job is waiting to be processed</td>
+</tr>
+<tr>
+<td><code>in_progress</code></td>
+<td>Video is being generated</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>Video is ready for download</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Generation failed (check error details)</td>
+</tr>
+<tr>
+<td><code>cancelled</code></td>
+<td>Job was canceled</td>
+</tr>
+</tbody>
+</table>
+<p>When a job fails, check <code>video.error</code> for details about what went wrong.</p>
+<h2 id="key-considerations">Key considerations</h2>
+<ul>
+<li><strong>Rate limits</strong>: You can run up to two video creation jobs simultaneously</li>
+<li><strong>Job expiration</strong>: Completed videos are available for download for 24 hours</li>
+<li><strong>Resolution requirements</strong>: Reference images must match the target video resolution exactly</li>
+<li><strong>Content filtering</strong>: Prompts are subject to content moderation; harmful content won't generate</li>
+</ul>
+<p>In the exercise that follows, you'll apply these techniques to build a complete video generation application.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>5. Summary</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/7-summary">https://learn.microsoft.com/en-us/training/modules/generate-video-with-foundry/7-summary</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Summary</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>In this module, you learned how to generate videos using Sora 2 in Microsoft Foundry.</p>
+<p>You explored how to:</p>
+<ul>
+<li>Deploy a Sora 2 video generation model in Microsoft Foundry</li>
+<li>Write effective prompts that describe camera framing, subject details, action, and lighting</li>
+<li>Use the Video playground to test video generation with different settings</li>
+<li>Generate videos from reference images and remix existing videos</li>
+<li>Build a Python application that creates videos programmatically using the OpenAI SDK</li>
+</ul>
+<p>With Sora 2, you can create realistic and imaginative video content from text prompts, transform images into videos, and make targeted adjustments to existing videos. The asynchronous API pattern—submit a job, poll for status, download the result—enables you to integrate video generation into your applications.</p>
+</div>
+<div class="TIP">
+<p>Tip</p>
+<p>For more information about video generation with Sora 2, see <strong><a data-linktype="absolute-path" href="/en-us/azure/ai-services/openai/concepts/video-generation">Video generation with Sora</a></strong> in the Azure OpenAI documentation.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+</body>
+</html>

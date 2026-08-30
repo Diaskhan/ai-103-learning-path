@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrate your agent with Microsoft 365</title>
+    <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #0078d4; border-bottom: 2px solid #0078d4; padding-bottom: 10px; }
+    h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0px; margin-bottom: 0px; }
+    .section { margin-bottom: 40px; }
+    .section-header { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .section-header a { color: #0078d4; text-decoration: none; }
+    .section-header a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    pre { background: #f4f4f4; padding: 15px; overflow-x: auto; border-radius: 5px; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .NOTE, .TIP, .IMPORTANT { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid; }
+    .IMPORTANT { background-color: #e7f3ff; border-color: #0078d4; }
+    .IMPORTANT > p:first-child { font-weight: bold; color: #0078d4; margin-top: 0; }
+    .TIP { background-color: #e8f5e9; border-color: #4caf50; }
+    .TIP > p:first-child { font-weight: bold; color: #2e7d32; margin-top: 0; }
+    .NOTE { background-color: #f3e5f5; border-color: #9c27b0; }
+    .NOTE > p:first-child { font-weight: bold; color: #7b1fa2; margin-top: 0; }
+</style>
+</head>
+<body>
+    <h1>Integrate your agent with Microsoft 365</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>1. Introduction</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/1-introduction">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/1-introduction</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Introduction</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Imagine you've built an AI agent in Microsoft Foundry that helps your team answer questions about company policies and procedures. The agent works great in the Foundry playground, but your users spend most of their day in Microsoft Teams. They want to interact with the agent directly in Teams chat, or even through Microsoft 365 Copilot, without switching to a separate application. How do you bridge this gap?</p>
+<p>Microsoft Foundry provides built-in capabilities to publish your agents directly to Microsoft Teams and Microsoft 365 Copilot. This integration allows users to interact with your custom AI agents in the same tools they already use for collaboration and productivity. Whether you need a support agent that answers IT questions, a knowledge assistant that helps onboard new employees, or a specialized advisor for your business domain, you can make these agents available where your users work.</p>
+<p>In this module, you learn how to publish Microsoft Foundry agents to Microsoft 365. You explore the publishing workflow from the Foundry portal, understand when you might need advanced integration options, and discover how to use Work IQ to give your agents access to Microsoft 365 data like emails, meetings, and documents.</p>
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>By the end of this module, you'll be able to:</p>
+<ul>
+<li>Explain the options for publishing Foundry agents to Microsoft 365</li>
+<li>Publish an agent from the Foundry portal to Teams and Microsoft 365 Copilot</li>
+<li>Use Work IQ to access Microsoft 365 data in your agents</li>
+<li>Test and troubleshoot agents integrated with Microsoft 365</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Familiarity with Azure and the Azure portal</li>
+<li>Experience building agents in Microsoft Foundry (recommended: <a data-linktype="absolute-path" href="/en-us/training/modules/develop-ai-agents-azure-vs-code/">Develop AI agents with Microsoft Foundry and Visual Studio Code</a> module)</li>
+<li>A Microsoft 365 subscription with access to Teams</li>
+</ul>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>We recognize that different people like to learn in different ways. You can choose to complete this module in video-based format or you can read the content as text and images. The text contains greater detail than the videos, so in some cases you might want to refer to it as supplemental material to the video presentation.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>2. Understand Foundry agent publishing options</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/2-understand-publishing-options">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/2-understand-publishing-options</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Understand Foundry agent publishing options</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>When you build an agent in Microsoft Foundry, it runs within the Foundry Agent Service infrastructure. Publishing promotes your agent from a development asset into a managed Azure resource with a dedicated endpoint, independent identity, and governance capabilities.</p>
+<h2 id="understanding-agent-applications">Understanding agent applications</h2>
+<p>When you publish an agent, Microsoft Foundry creates an <strong>Agent Application</strong> resource with:</p>
+<ul>
+<li><strong>Dedicated invocation URL</strong>: A stable endpoint that remains consistent as you update agent versions</li>
+<li><strong>Agent identity</strong>: A distinct Microsoft Entra identity separate from your development project</li>
+<li><strong>User data isolation</strong>: Inputs and interactions from one user aren't available to other users</li>
+</ul>
+<p>The Agent Application acts as a routing layer. When you publish a new agent version, traffic automatically routes to the updated deployment without changing the public endpoint.</p>
+<h2 id="publishing-to-microsoft-365">Publishing to Microsoft 365</h2>
+<p>The primary focus of this module is Microsoft 365 integration, which enables your agent to appear within Teams and Copilot. Publishing to Microsoft 365:</p>
+<ul>
+<li>Creates an Azure Bot Service resource that routes messages between Microsoft 365 and your agent</li>
+<li>Generates a Microsoft 365 publishing package for distribution</li>
+<li>Registers a Microsoft Entra ID application for authentication</li>
+<li>Makes your agent discoverable in the Teams agent store</li>
+</ul>
+<h3 id="direct-publishing-from-foundry-portal">Direct publishing from Foundry portal</h3>
+<p>The most straightforward approach is publishing directly from the Foundry portal. The publishing wizard:</p>
+<ol>
+<li>Creates an Azure Bot Service resource in your subscription</li>
+<li>Registers a Microsoft Entra ID application</li>
+<li>Generates a Microsoft 365 publishing package</li>
+<li>Prepares your agent for distribution</li>
+</ol>
+<p>This approach is ideal when you want to deploy quickly or keep your agent logic entirely within Foundry.</p>
+<h3 id="microsoft-365-agents-toolkit">Microsoft 365 Agents Toolkit</h3>
+<p>For complex scenarios, you can use the Microsoft 365 Agents Toolkit to create a proxy application that connects to your Foundry agent. Consider this approach when you need custom single sign-on (SSO), advanced middleware logic, or multi-environment deployment pipelines. The Agents Toolkit is covered later in this module as an optional advanced topic.</p>
+<h3 id="publish-scopes">Publish scopes</h3>
+<p>When publishing to Microsoft 365, you choose between two distribution scopes:</p>
+<table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Description</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shared</strong></td>
+<td>Available immediately without admin approval. Appears under <strong>Your agents</strong> in Teams.</td>
+<td>Personal testing, small team pilots</td>
+</tr>
+<tr>
+<td><strong>Organization</strong></td>
+<td>Available to everyone in your tenant under <strong>Built by your org</strong>. Requires admin approval.</td>
+<td>Production deployments</td>
+</tr>
+</tbody>
+</table>
+<h2 id="other-publishing-channels">Other publishing channels</h2>
+<p>While this module focuses on Microsoft 365, Foundry agents can also publish to:</p>
+<ul>
+<li><strong>Web application preview</strong>: Browser-based interface for demos and stakeholder testing</li>
+<li><strong>Stable API endpoint</strong>: REST API for embedding in custom applications</li>
+<li><strong>Azure Bot Service channels</strong>: Slack, Telegram, Twilio (SMS), Facebook, and others</li>
+</ul>
+<p>These options are useful when you need to reach users outside Microsoft 365 or embed your agent in custom applications.</p>
+<h2 id="agent-identity-and-permissions">Agent identity and permissions</h2>
+<p>When you publish an agent, the system creates a distinct agent identity. This matters because:</p>
+<ul>
+<li>The agent authenticates to Azure resources using its own identity</li>
+<li>Development-time permissions on your project identity don't transfer automatically</li>
+<li>Tools that access Azure services need permissions reconfigured after publishing</li>
+</ul>
+<p>If your agent uses tools that connect to services like Azure AI Search, grant the published agent's identity appropriate permissions.</p>
+<h2 id="prerequisites-for-publishing">Prerequisites for publishing</h2>
+<p>Before publishing an agent to Microsoft 365, ensure you have:</p>
+<ul>
+<li><strong>Azure AI Project Manager</strong> role on your Foundry project</li>
+<li><strong>Azure AI User</strong> role on the agent application scope</li>
+<li>An Azure subscription where you can create Azure Bot Service resources</li>
+<li>Permissions to register applications in Microsoft Entra ID</li>
+<li>A Microsoft 365 tenant that allows custom apps and bots</li>
+</ul>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>3. Publish an agent from Foundry portal to Teams</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/3-publish-agent-foundry-portal">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/3-publish-agent-foundry-portal</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Publish an agent from Foundry portal to Teams</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Publishing an agent from the Microsoft Foundry portal to Microsoft Teams and Microsoft 365 Copilot is a straightforward process. The portal guides you through creating an agent application, provisioning the required Azure resources, and generating a publishing package for distribution.</p>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Before starting the publishing process, complete these preparation steps:</p>
+<h3 id="test-your-agent-thoroughly">Test your agent thoroughly</h3>
+<p>Use the Foundry playground to verify your agent behaves as expected. Test various user inputs, confirm any configured tools work correctly, and check that responses are appropriate for your use case. Issues are easier to fix before publishing than after.</p>
+<h3 id="verify-your-permissions">Verify your permissions</h3>
+<p>Confirm you have the required role assignments:</p>
+<ul>
+<li><strong>Azure AI Project Manager</strong> role on your Foundry project to publish agents</li>
+<li><strong>Azure AI User</strong> role to invoke or chat with published agents</li>
+<li>Permissions to create resources in your Azure subscription</li>
+<li>Permissions to register applications in Microsoft Entra ID</li>
+</ul>
+<h3 id="register-the-bot-service-provider">Register the Bot Service provider</h3>
+<p>The publishing process creates an Azure Bot Service resource. Ensure the <strong>Microsoft.BotService</strong> provider is registered in your Azure subscription. You can check this in the Azure portal under your subscription's <strong>Resource providers</strong> section.</p>
+<h3 id="prepare-metadata">Prepare metadata</h3>
+<p>Gather the following information before starting:</p>
+<ul>
+<li>A display name for your agent (appears in the Teams agent store)</li>
+<li>A brief description of what your agent does</li>
+<li>Small (32x32 pixels) and large (192x192 pixels) icons in PNG format</li>
+<li>Your organization's name and contact details</li>
+<li>URLs for your privacy policy and terms of use</li>
+</ul>
+<div class="WARNING">
+<p>Warning</p>
+<p>Don't include secrets, API keys, or sensitive information in any metadata fields. These fields are visible to users who discover your agent.</p>
+</div>
+<h2 id="publish-your-agent">Publish your agent</h2>
+<p>Follow these steps to publish your agent from the Foundry portal:</p>
+<h3 id="step-1-select-your-agent-version">Step 1: Select your agent version</h3>
+<ol>
+<li>Open the <a data-linktype="external" href="https://ai.azure.com">Microsoft Foundry portal</a> and navigate to your project.</li>
+<li>Select the agent you want to publish from your agent list.</li>
+<li>Review the agent configuration to confirm it's ready for publishing.</li>
+</ol>
+<h3 id="step-2-start-the-publishing-process">Step 2: Start the publishing process</h3>
+<ol>
+<li>Select <strong>Publish</strong> to open the publishing dialog.</li>
+<li>Select <strong>Publish</strong> again, then choose <strong>Publish to Teams and Microsoft 365 Copilot</strong>.</li>
+<li>The Microsoft 365 publishing configuration window opens.</li>
+</ol>
+<h3 id="step-3-configure-azure-bot-service">Step 3: Configure Azure Bot Service</h3>
+<ol>
+<li>The portal automatically generates an application ID and tenant ID. Note these values for troubleshooting.</li>
+<li>In the <strong>Azure Bot Service</strong> dropdown, select <strong>Create an Azure Bot Service</strong> to provision a new bot resource.</li>
+<li>Wait for the portal to create the Bot Service resource in your subscription.</li>
+</ol>
+<h3 id="step-4-complete-the-metadata">Step 4: Complete the metadata</h3>
+<p>Fill in the required fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Display name for your agent in the Teams store</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Brief explanation of what your agent does</td>
+</tr>
+<tr>
+<td><strong>Icons</strong></td>
+<td>Upload small and large PNG icons</td>
+</tr>
+<tr>
+<td><strong>Publisher information</strong></td>
+<td>Your organization name and contact details</td>
+</tr>
+<tr>
+<td><strong>Privacy policy</strong></td>
+<td>URL to your organization's privacy policy</td>
+</tr>
+<tr>
+<td><strong>Terms of use</strong></td>
+<td>URL to your terms of service</td>
+</tr>
+</tbody>
+</table>
+<h3 id="step-5-choose-your-publish-scope">Step 5: Choose your publish scope</h3>
+<p>Select the distribution scope for your agent:</p>
+<ul>
+<li><strong>Shared scope</strong>: Agent appears under "Your agents" in the store. Available immediately. Best for testing and small teams.</li>
+<li><strong>Organization scope</strong>: Agent appears under "Built by your org" in the store. Requires admin approval. Best for production deployments.</li>
+</ul>
+<h3 id="step-6-prepare-and-optionally-download-the-package">Step 6: Prepare and optionally download the package</h3>
+<ol>
+<li>Select <strong>Prepare Agent</strong> to start packaging your agent.</li>
+<li>Wait for the packaging process to complete (typically 1-2 minutes).</li>
+<li>When ready, you can either:
+<ul>
+<li><strong>Download the package</strong> to test locally before distribution</li>
+<li><strong>Continue the in-product publishing flow</strong> for direct distribution</li>
+</ul>
+</li>
+</ol>
+<h2 id="test-the-publishing-package-in-teams">Test the publishing package in Teams</h2>
+<p>If you downloaded the package, test it in Teams before broad distribution:</p>
+<ol>
+<li>Open Microsoft Teams.</li>
+<li>Navigate to <strong>Apps</strong> &gt; <strong>Manage your apps</strong> &gt; <strong>Upload an app</strong>.</li>
+<li>Select <strong>Upload a custom app</strong> and choose the downloaded <code>.zip</code> file.</li>
+<li>Teams installs the app and shows it in your apps list.</li>
+<li>Open the agent and send a test message.</li>
+</ol>
+<p>Verify the following:</p>
+<ul>
+<li>[ ] The agent responds to messages</li>
+<li>[ ] Response content is accurate and appropriate</li>
+<li>[ ] Response times are acceptable</li>
+<li>[ ] Any configured tools work correctly</li>
+</ul>
+<h2 id="request-admin-approval-for-organization-scope">Request admin approval for organization scope</h2>
+<p>If you published with organization scope, an administrator must approve your agent before it's available organization-wide:</p>
+<ol>
+<li>Direct your Microsoft 365 administrator to the <a data-linktype="external" href="https://admin.cloud.microsoft">Microsoft 365 admin center</a>.</li>
+<li>Navigate to <strong>Agents</strong> &gt; <strong>All</strong> &gt; <strong>Requested</strong>.</li>
+<li>Find your agent in the list of pending requests.</li>
+<li>The administrator selects <strong>Approve request and activate</strong>.</li>
+</ol>
+<p>Once approved, the agent appears in the <strong>Built by your org</strong> section of the Teams agent store for all users in your tenant. App policies in your organization control which users can access the agent.</p>
+<h2 id="reassign-permissions-after-publishing">Reassign permissions after publishing</h2>
+<p>When you publish an agent, the system creates a distinct agent identity. If your agent uses tools that access Azure resources, you need to grant permissions to this new identity:</p>
+<ol>
+<li>In the Foundry portal, go to your published agent and note the agent application's identity information.</li>
+<li>In the Azure portal, navigate to the resources your agent accesses (for example, Azure AI Search, storage accounts, or Cosmos DB).</li>
+<li>Assign the appropriate RBAC roles to the published agent identity.</li>
+</ol>
+<p>Without this step, tools that worked during development might fail after publishing because the new agent identity lacks the required permissions.</p>
+<h2 id="update-a-published-agent">Update a published agent</h2>
+<p>When you make changes to your agent in Foundry, you need to republish to update the version available in Teams:</p>
+<ol>
+<li>Make your changes in the Foundry portal.</li>
+<li>Test the changes in the Foundry playground.</li>
+<li>Repeat the publishing process to create a new package.</li>
+<li>For shared scope, upload the new package to Teams.</li>
+<li>For organization scope, the update might require re-approval depending on your organization's policies.</li>
+</ol>
+<p>Users interacting with your agent receive the updated version once the new package is deployed.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>4. Advanced - Use Microsoft 365 Agents Toolkit</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/4-agents-toolkit-advanced">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/4-agents-toolkit-advanced</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Advanced - Use Microsoft 365 Agents Toolkit</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>For most scenarios, publishing directly from the Foundry portal is the simplest path to get your agents into Microsoft Teams and Microsoft 365 Copilot. However, some complex enterprise scenarios require additional control over the integration layer. The Microsoft 365 Agents Toolkit provides an alternative approach for these situations.</p>
+<p>This unit covers the Agents Toolkit from a high level perspective. Follow the links to documentation at the end for a deeper explanation.</p>
+<div class="NOTE">
+<p>Note</p>
+<p>This unit covers an advanced topic. If you're getting started with Foundry agent integration, you can skip this unit and return later if you encounter scenarios that require the Agents Toolkit approach.</p>
+</div>
+<h2 id="when-to-consider-the-agents-toolkit">When to consider the Agents Toolkit</h2>
+<p>The Microsoft 365 Agents Toolkit is a suite of development tools available as extensions for Visual Studio Code and Visual Studio. Consider using it when your agent requires custom single sign-on (SSO) configuration beyond the default Entra ID setup, or when you need to add middleware logic for custom processing, logging, or transformation between Teams and your Foundry agent.</p>
+<p>The toolkit is also valuable for organizations that require multi-environment deployment with separate development, staging, and production configurations. It provides advanced debugging capabilities with detailed tracing beyond what the Foundry portal offers, and integrates with CI/CD pipelines through GitHub Actions or Azure DevOps.</p>
+<h2 id="how-the-agents-toolkit-approach-works">How the Agents Toolkit approach works</h2>
+<p>Instead of publishing directly from Foundry, you create a proxy application using the Agents Toolkit that sits between Microsoft 365 and your Foundry agent:</p>
+<pre><code>Teams/Copilot → Proxy App (Agents Toolkit) → Foundry Agent
+</code></pre>
+<p>This proxy application receives messages from Teams or Copilot through Azure Bot Service, processes them through any custom middleware you've configured, forwards the request to your Foundry agent, and returns the response through the same path. The proxy approach gives you control over every step of the message flow, but adds complexity to your deployment.</p>
+<h2 id="getting-started-with-the-agents-toolkit">Getting started with the Agents Toolkit</h2>
+<p>If you determine the Agents Toolkit is right for your scenario, here's an overview of the setup process.</p>
+<p>Start by installing the Microsoft 365 Agents Toolkit extension from the Visual Studio Code marketplace. Once installed, open the extension panel and select <strong>Create a New Agent/App</strong>, then choose <strong>Custom Engine Agent</strong> as the project type. The wizard guides you through configuration options including your AI model source.</p>
+<p>The project template creates scaffolding for a standalone agent. To connect to an existing Foundry agent, configure the project to call your Foundry agent's endpoint, set up authentication using the agent's credentials, and implement any middleware logic you need.</p>
+<p>The Agents Toolkit includes the <strong>Microsoft 365 Agents Playground</strong>, a local testing environment that simulates Teams. Run your project in debug mode to open the playground in your browser, where you can send test messages to verify the connection works correctly. Once testing is complete, use the toolkit to provision Azure resources, deploy your proxy application, and register it in Teams.</p>
+<h2 id="comparison-summary">Comparison summary</h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Direct Foundry publishing</th>
+<th>Agents Toolkit proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Setup time</td>
+<td>Minutes</td>
+<td>Hours to days</td>
+</tr>
+<tr>
+<td>Code required</td>
+<td>None</td>
+<td>Proxy application</td>
+</tr>
+<tr>
+<td>Customization</td>
+<td>Limited</td>
+<td>Extensive</td>
+</tr>
+<tr>
+<td>Debugging</td>
+<td>Foundry portal</td>
+<td>Full IDE debugging</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Standard deployments</td>
+<td>Complex enterprise needs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="learn-more">Learn more</h2>
+<p>For detailed guidance on the Agents Toolkit, see:</p>
+<ul>
+<li><a data-linktype="absolute-path" href="/en-us/microsoftteams/platform/toolkit/overview-agents-toolkit">Microsoft 365 Agents Toolkit documentation</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/microsoft-365/agents-sdk/create-new-toolkit-project-vsc">Create custom engine agents with the Agents Toolkit</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/microsoft-365/agents-sdk/agents-sdk-overview">Microsoft 365 Agents SDK overview</a></li>
+</ul>
+<p>The direct publishing approach covered in the previous unit handles the majority of integration scenarios. Reserve the Agents Toolkit for situations where you've identified specific requirements it addresses.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>5. Access Microsoft 365 data with Work IQ</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/5-access-m365-data-workiq">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/5-access-m365-data-workiq</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Access Microsoft 365 data with Work IQ</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>When building agents that help users with workplace tasks, access to organizational data can dramatically improve the agent's usefulness. Microsoft Work IQ provides a way to connect AI agents to Microsoft 365 data, including emails, meetings, documents, Teams messages, and people information.</p>
+<h2 id="what-is-work-iq">What is Work IQ?</h2>
+<p>Microsoft Work IQ is a command-line interface (CLI) and server that connects AI assistants to your Microsoft 365 Copilot data. It enables agents to query workplace information using natural language, providing rich context that helps agents give more relevant and accurate responses.</p>
+<p>With Work IQ, your agents can answer questions like:</p>
+<ul>
+<li>"What did my manager say about the project deadline?"</li>
+<li>"Find my recent documents about Q4 planning"</li>
+<li>"Summarize today's messages in the Engineering channel"</li>
+<li>"Who is working on Project Alpha?"</li>
+</ul>
+<p>Work IQ accesses data across multiple Microsoft 365 services:</p>
+<table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Example capabilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Emails</strong></td>
+<td>Search messages, find communications from specific people</td>
+</tr>
+<tr>
+<td><strong>Meetings</strong></td>
+<td>Check calendar, retrieve meeting notes and decisions</td>
+</tr>
+<tr>
+<td><strong>Documents</strong></td>
+<td>Find files in SharePoint and OneDrive, search content</td>
+</tr>
+<tr>
+<td><strong>Teams messages</strong></td>
+<td>Summarize channel discussions, find specific conversations</td>
+</tr>
+<tr>
+<td><strong>People</strong></td>
+<td>Identify team members, find collaborators on projects</td>
+</tr>
+</tbody>
+</table>
+<h2 id="understanding-mcp-servers">Understanding MCP servers</h2>
+<p>Work IQ is built on the <strong>Model Context Protocol (MCP)</strong>, an open protocol that enables AI assistants to connect to external data sources and tools. Understanding MCP helps explain how Work IQ functions.</p>
+<p>An MCP server exposes capabilities that AI agents can use. These capabilities might include:</p>
+<ul>
+<li><strong>Tools</strong>: Actions the agent can take, like searching for documents or sending messages</li>
+<li><strong>Resources</strong>: Data sources the agent can query</li>
+<li><strong>Prompts</strong>: Predefined templates for common queries</li>
+</ul>
+<p>When you configure an MCP server for your agent, the agent discovers what tools and resources are available and can use them to fulfill user requests. Work IQ acts as an MCP server specifically designed for Microsoft 365 data.</p>
+<h2 id="how-work-iq-operates">How Work IQ operates</h2>
+<p>Work IQ runs in two modes:</p>
+<h3 id="cli-mode">CLI mode</h3>
+<p>In CLI mode, you run queries directly from your terminal:</p>
+<pre><code class="lang-bash">workiq ask -q "What requirements did Sarah share about the authentication feature?"
+</code></pre>
+<p>This mode is useful for quick queries during development or for scripts that need to retrieve workplace information.</p>
+<h3 id="mcp-server-mode">MCP server mode</h3>
+<p>In MCP server mode, Work IQ integrates with AI assistants like GitHub Copilot in Visual Studio Code. Your AI assistant can automatically access workplace context when relevant to your work.</p>
+<p>For example, if you're implementing a feature that was discussed in a recent meeting, your AI assistant can access that meeting context to provide more relevant suggestions.</p>
+<h2 id="installing-work-iq">Installing Work IQ</h2>
+<p>You can install Work IQ in several ways depending on your preferred workflow.</p>
+<h3 id="install-using-npm">Install using npm</h3>
+<pre><code class="lang-bash"># Global installation
+npm install -g @microsoft/workiq
+
+# Or run directly without installation
+npx -y @microsoft/workiq mcp
+</code></pre>
+<h3 id="install-using-github-copilot-cli">Install using GitHub Copilot CLI</h3>
+<p>If you use GitHub Copilot CLI, you can install Work IQ as a plugin:</p>
+<ol>
+<li>Open GitHub Copilot CLI by running <code>copilot</code>.</li>
+<li>Add the plugins marketplace (one-time setup): <code>/plugin marketplace add github/copilot-plugins</code></li>
+<li>Install Work IQ: <code>/plugin install workiq@copilot-plugins</code></li>
+<li>Restart Copilot CLI and start querying your Microsoft 365 data.</li>
+</ol>
+<h3 id="configure-for-visual-studio-code">Configure for Visual Studio Code</h3>
+<p>You can add Work IQ as an MCP server through the VS Code settings. Add the following to your MCP configuration:</p>
+<pre><code class="lang-json">{
+  "workiq": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@microsoft/workiq",
+      "mcp"
+    ],
+    "tools": [
+      "*"
+    ]
+  }
+}
+</code></pre>
+<p>Before first use, accept the End User License Agreement:</p>
+<pre><code class="lang-bash">workiq accept-eula
+</code></pre>
+<h2 id="prerequisites-for-work-iq">Prerequisites for Work IQ</h2>
+<p>To use Work IQ, you need:</p>
+<ul>
+<li>Node.js installed on your machine (if using the CLI locally)</li>
+<li>A Microsoft 365 subscription with a Copilot license</li>
+<li>Administrative consent for the Work IQ application in your Microsoft Entra tenant</li>
+</ul>
+<div class="IMPORTANT">
+<p>Important</p>
+<p>Work IQ requires administrative consent because it accesses organization-wide Microsoft 365 data. If you're not a tenant administrator, contact your IT department to request access.</p>
+</div>
+<h2 id="security-and-data-access">Security and data access</h2>
+<p>Work IQ inherits the security model of Microsoft 365 Copilot:</p>
+<ul>
+<li><strong>Permission-based access</strong>: Work IQ can only access data you already have permission to view</li>
+<li><strong>No data storage</strong>: Work IQ doesn't store your Microsoft 365 data; it retrieves information on-demand</li>
+<li><strong>Enterprise security</strong>: All data access follows your organization's security policies</li>
+<li><strong>Admin visibility</strong>: Administrators can monitor and control Work IQ usage</li>
+</ul>
+<p>When you query Work IQ, it accesses data through Microsoft Graph with your authenticated identity. This means:</p>
+<ul>
+<li>You can't access documents you don't have permission to view</li>
+<li>Queries are auditable by your organization</li>
+<li>Data protection policies apply to Work IQ queries</li>
+</ul>
+<h2 id="using-work-iq-with-agent-development">Using Work IQ with agent development</h2>
+<p>Work IQ helps you understand the context your users work in during agent development. You can interact with Work IQ through either the CLI or the MCP server, depending on your workflow.</p>
+<h3 id="cli-approach">CLI approach</h3>
+<p>The CLI is useful for quick, ad-hoc queries during development. Run the <code>workiq ask</code> command directly from your terminal:</p>
+<pre><code class="lang-bash"># Find project context
+workiq ask -q "What were the key decisions in last week's architecture review meeting?"
+
+# Understand requirements from documents
+workiq ask -q "Summarize the requirements in the user portal spec document"
+
+# Check team communications
+workiq ask -q "What has the engineering team discussed about the API changes?"
+</code></pre>
+<p>The CLI approach works well for scripts, one-off queries, or when you need quick answers without opening an IDE.</p>
+<h3 id="mcp-server-approach">MCP server approach</h3>
+<p>When Work IQ runs as an MCP server, your AI assistant can access the same Microsoft 365 data automatically. Instead of running CLI commands, you interact naturally with your AI assistant, which calls Work IQ tools behind the scenes.</p>
+<p>For example, in VS Code with GitHub Copilot configured to use Work IQ:</p>
+<ul>
+<li>Ask Copilot: "What requirements did Sarah share about the authentication feature?"</li>
+<li>Copilot uses Work IQ's MCP tools to query your Microsoft 365 data</li>
+<li>You receive the answer in the chat without running any commands</li>
+</ul>
+<p>The MCP approach integrates workplace context seamlessly into your development workflow. Your AI assistant decides when to query Work IQ based on your questions, making the experience feel natural rather than requiring explicit commands.</p>
+<p>Both approaches access the same underlying data with the same permissions. Choose the CLI for scripting and quick terminal queries, or the MCP server for integrated AI assistant experiences.</p>
+<div class="NOTE">
+<p>Note</p>
+<p>Work IQ is currently in preview. Features and APIs may change as the product evolves.</p>
+</div>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>6. Test and iterate your integrated agent</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/6-test-iterate-agent">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/6-test-iterate-agent</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Test and iterate your integrated agent</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>After publishing your agent using the steps in the previous units, ongoing testing and monitoring help ensure your agent performs reliably for users. This unit focuses on post-deployment testing strategies, troubleshooting common issues, and monitoring your agent over time.</p>
+<h2 id="testing-beyond-the-foundry-playground">Testing beyond the Foundry playground</h2>
+<p>The Foundry playground is valuable for development testing, but it doesn't simulate the full published experience. After publishing, test your agent in Microsoft Teams to verify:</p>
+<ul>
+<li>The Teams user interface renders responses correctly</li>
+<li>Authentication flows work as expected</li>
+<li>Response times are acceptable in production</li>
+<li>The published agent identity has necessary permissions</li>
+</ul>
+<h3 id="testing-with-multiple-users">Testing with multiple users</h3>
+<p>Have colleagues test your agent to discover issues you might miss. Different users phrase questions differently, and fresh perspectives identify confusing responses. Testing across different Teams clients (desktop, web, mobile) can also reveal platform-specific issues.</p>
+<h2 id="common-troubleshooting-scenarios">Common troubleshooting scenarios</h2>
+<p>When issues arise, these common scenarios and resolutions can help:</p>
+<h3 id="agent-doesnt-respond-in-teams">Agent doesn't respond in Teams</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>Azure Bot Service isn't running</li>
+<li>Bot Service configuration is incorrect</li>
+<li>Network issues between Teams and your agent</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Verify the Bot Service resource exists in the Azure portal.</li>
+<li>Check Bot Service logs for errors.</li>
+<li>Confirm the agent is published and the package was uploaded correctly.</li>
+</ol>
+<h3 id="tools-work-in-foundry-but-fail-in-teams">Tools work in Foundry but fail in Teams</h3>
+<p><strong>Possible cause:</strong> The published agent identity doesn't have the required permissions.</p>
+<p><strong>Resolution:</strong></p>
+<ol>
+<li>Find the published agent's identity in the Foundry portal.</li>
+<li>In the Azure portal, locate the resources your tools access.</li>
+<li>Assign appropriate RBAC roles to the published agent identity.</li>
+</ol>
+<h3 id="users-cant-find-the-agent">Users can't find the agent</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>Wrong publish scope selected</li>
+<li>Admin approval pending (for organization scope)</li>
+<li>Tenant policies block custom apps</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>For shared scope: Share the direct link with users.</li>
+<li>For organization scope: Verify admin approval in the Microsoft 365 admin center.</li>
+<li>Check tenant settings for custom app permissions.</li>
+</ul>
+<h3 id="slow-response-times">Slow response times</h3>
+<p><strong>Possible causes:</strong></p>
+<ul>
+<li>Complex agent instructions requiring extended processing</li>
+<li>Tools that query large data sets</li>
+<li>Network latency</li>
+</ul>
+<p><strong>Resolution:</strong></p>
+<ul>
+<li>Simplify agent instructions where possible.</li>
+<li>Optimize tool configurations.</li>
+<li>Test from different network locations to isolate network issues.</li>
+</ul>
+<h2 id="monitoring-published-agents">Monitoring published agents</h2>
+<p>After deployment, ongoing monitoring helps identify issues before users report them:</p>
+<h3 id="check-foundry-metrics">Check Foundry metrics</h3>
+<p>The Foundry portal provides metrics for published agents:</p>
+<ul>
+<li>Request volume and patterns</li>
+<li>Response times</li>
+<li>Error rates</li>
+<li>Tool invocation statistics</li>
+</ul>
+<p>Review these metrics regularly to spot trends that indicate problems.</p>
+<h3 id="review-application-insights">Review Application Insights</h3>
+<p>If you've configured Application Insights integration, you can:</p>
+<ul>
+<li>Trace individual conversations</li>
+<li>Analyze error patterns</li>
+<li>Measure end-to-end latency</li>
+<li>Set up alerts for anomalies</li>
+</ul>
+<h3 id="gather-user-feedback">Gather user feedback</h3>
+<p>Establish channels for users to report issues:</p>
+<ul>
+<li>Create a Teams channel or email address for agent feedback</li>
+<li>Periodically review feedback to identify common problems</li>
+<li>Use feedback to prioritize agent improvements</li>
+</ul>
+<h2 id="iterating-on-your-agent">Iterating on your agent</h2>
+<p>When testing reveals issues or you receive user feedback, update your agent in the Foundry portal and republish following the same process covered in the publishing unit. For organization scope deployments, check your tenant's policies to determine if updates require re-approval.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>Keep a testing checklist specific to your agent. Document the key scenarios you test before each release to ensure consistent quality.</p>
+</div>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>7. Summary</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/9-summary">https://learn.microsoft.com/en-us/training/modules/integrate-foundry-agent-with-m365/9-summary</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Summary</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>In this module, you learned how to publish Microsoft Foundry agents to Microsoft Teams and Microsoft 365 Copilot, making your AI assistants available where users already work.</p>
+<p>You explored the direct publishing workflow from the Foundry portal, which automatically provisions Azure Bot Service and creates the necessary Microsoft Entra ID registrations. You also learned about the Microsoft 365 Agents Toolkit as an alternative for complex enterprise scenarios.</p>
+<p>The module covered publish scopes (shared for testing, organization for broad distribution), agent identity considerations for RBAC permissions, and how Work IQ connects agents to Microsoft 365 data through the Model Context Protocol (MCP).</p>
+<h2 id="learn-more">Learn more</h2>
+<ul>
+<li><a data-linktype="absolute-path" href="/en-us/azure/ai-foundry/agents/how-to/publish-copilot">Publish agents to Microsoft 365 Copilot and Microsoft Teams</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/microsoft-365-copilot/extensibility/workiq-overview">Microsoft Work IQ documentation</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/microsoftteams/platform/toolkit/overview-agents-toolkit">Microsoft 365 Agents Toolkit overview</a></li>
+<li><a data-linktype="absolute-path" href="/en-us/azure/ai-foundry/agents/concepts/agent-identity">Agent identity concepts in Microsoft Foundry</a></li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<p>Now that you can publish agents to Microsoft 365, consider exploring:</p>
+<ul>
+<li>Adding tools to extend your agent's capabilities</li>
+<li>Implementing grounding with enterprise data sources like Azure AI Search</li>
+<li>Building multi-agent systems for complex workflows</li>
+</ul>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+</body>
+</html>

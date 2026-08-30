@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Develop generative AI apps that use tools</title>
+    <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+    h1 { color: #0078d4; border-bottom: 2px solid #0078d4; padding-bottom: 10px; }
+    h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0px; margin-bottom: 0px; }
+    .section { margin-bottom: 40px; }
+    .section-header { background: #f5f5f5; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    .section-header a { color: #0078d4; text-decoration: none; }
+    .section-header a:hover { text-decoration: underline; }
+    img { max-width: 100%; height: auto; }
+    pre { background: #f4f4f4; padding: 15px; overflow-x: auto; border-radius: 5px; }
+    code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    .NOTE, .TIP, .IMPORTANT { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid; }
+    .IMPORTANT { background-color: #e7f3ff; border-color: #0078d4; }
+    .IMPORTANT > p:first-child { font-weight: bold; color: #0078d4; margin-top: 0; }
+    .TIP { background-color: #e8f5e9; border-color: #4caf50; }
+    .TIP > p:first-child { font-weight: bold; color: #2e7d32; margin-top: 0; }
+    .NOTE { background-color: #f3e5f5; border-color: #9c27b0; }
+    .NOTE > p:first-child { font-weight: bold; color: #7b1fa2; margin-top: 0; }
+</style>
+</head>
+<body>
+    <h1>Develop generative AI apps that use tools</h1>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>1. Introduction</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/01-introduction">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/01-introduction</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Introduction</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Generative AI models are powerful at understanding and generating text, but they operate within a knowledge boundary. They can only reason about information in their training data. By integrating <strong>tools</strong> into your generative AI interactions, you unlock capabilities far beyond what the model alone can do.</p>
+<div class="NOTE">
+<p>Note</p>
+<p>The use of <em>tools</em> in generative AI model prompts shouldn't be confused with <em><a data-linktype="absolute-path" href="/en-us/azure/ai-services/reference/sdk-package-resources?azure-portal=true">Foundry Tools</a></em>; which are Azure AI APIs that you can use in your applications and agents.</p>
+</div>
+<h2 id="why-tools-matter">Why tools matter</h2>
+<p>Tools bridge the gap between AI reasoning and real-world actions. They enable your generative AI applications to:</p>
+<ul>
+<li><strong>Access real-time information</strong>: Fetch current data, weather, stock prices, or API responses that weren't in the model's training data</li>
+<li><strong>Take actions</strong>: perform tasks like sending emails, creating database records, or triggering workflows based on AI decisions</li>
+<li><strong>Ground responses in facts</strong>: Retrieve specific, authoritative information to reduce incorrect information and improve accuracy</li>
+<li><strong>Extend functionality</strong>: Connect to your existing systems, databases, and business logic seamlessly</li>
+<li><strong>Build intelligent workflows</strong>: Chain multiple operations together so AI coordinates complex, multi-step processes</li>
+</ul>
+<p>Without tools, generative AI works in isolation. With tools, it becomes an intelligent assistant that can observe, reason, and act on the world around it.</p>
+<p>In this module, we'll focus on specifying tools in prompts that a client application submits to a model. In this kind of solution, the tool configuration is managed by the client application - essentially creating a custom generative AI powered assistant within the application logic itself. Learning how to use tools on-demand with a generative AI model is a useful first step in learning how to build <em>agentic AI</em> solutions, in which the model, instructions, and tools are encapsulated and persisted in a named <em>agent</em>.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>You can learn more about how to use the Microsoft Foundry Agents SDK to create agents with persisted configurations in <a data-linktype="absolute-path" href="/en-us/training/paths/develop-ai-agents-azure/">Develop AI agents on Azure</a>.</p>
+</div>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>We recognize that different people like to learn in different ways. You can choose to complete this module in video-based format or you can read the content as text and images. The text contains greater detail than the videos, so in some cases you might want to refer to it as supplemental material to the video presentation.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>2. What are tools?</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/02-what-are-tools">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/02-what-are-tools</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">What are tools?</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>Microsoft Foundry Models includes models that are capable of using tools to find information or perform tasks. You can use tool support in models by specifying which tools you want the model to use in prompts submitted through the OpenAI <em>Responses</em> API.</p>
+<p><img alt="Diagram of an application configuring a model to use tools." data-linktype="relative-path" src="https://learn.microsoft.com/en-us/training/wwl-data-ai/use-generative-ai-tools/media/tools.png"/></p>
+<p>When you develop a generative AI application using Microsoft Foundry, you can search Foundry Models for a model with tool calling capabilities and deploy it. Then, you can develop client applications that use the OpenAI Responses API to submit prompts to the deployed model, specifying the tools that the model can use.</p>
+<div class="NOTE">
+<p>Note</p>
+<p>By default, the <em>model</em> chooses when to use a tool (and which one), based on the prompt. You can configure tool selection rules and use the <em>Instructions</em> (system prompt) parameter to guide this choice.</p>
+</div>
+<p>Some of the commonly used tools available in the <em>Responses</em> API, include:</p>
+<ul>
+<li><strong>code_interpreter</strong>: A Python environment in which the model can generate and run code.</li>
+<li><strong>web_search</strong>: A tool that enables the model to find general information on the Internet, which allows it to base responses on more current data than it was trained on.</li>
+<li><strong>file_search</strong>: A tool that enables the model to search specific files that you upload to a dedicated vector search index - enabling it to ground responses in specific knowledge.</li>
+<li><strong>function</strong>: A tool that enables the model to call custom functions in your application code.</li>
+</ul>
+<p>We'll explore these tools in this module.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>These represent only <em>some</em> of the available tools; and development of tools for agentic AI solutions is a growing area. To learn more about tools supported in the OpenAI Response API, see the <a data-linktype="external" href="https://developers.openai.com/api/docs/guides/tools?azure-portal=true">OpenAI developer guide</a></p>
+</div>
+<h2 id="specifying-tools-in-the-responses-api">Specifying tools in the <em>Responses</em> API</h2>
+<p>You can specify one or more tools in a call to the <code>responses.create()</code> method when generating a response from a model. The following Python pseudocode example indicates where the list of callable tools is specified:</p>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url={openai_endpoint},
+    api_key={auth_key_or_token}
+)
+
+response = client.responses.create(
+    model={model_deployment},
+    instructions="You are a helpful AI assistant.",
+    input="Find me some information about vintage computers.",
+    # Specify available tools as a JSON list
+    tools=[
+        { 
+            # A tool definition
+            "type": "{tool_type}",
+            "{tool-specific-setting}": "{value}",
+                ...
+        },
+        { 
+            # Another tool definition
+            "type": "{another_tool_type}",
+            "{tool-specific-setting}": "{value}",
+                ...
+        }
+    ]
+)
+print(response.output_text)
+</code></pre>
+<div class="TIP">
+<p>Tip</p>
+<p>To learn more about using the <em>Responses</em> API to submit a prompt to a model in Microsoft Foundry, see the <a data-linktype="absolute-path" href="/en-us/training/modules/foundry-sdk?azure-portal=true">Develop a generative AI chat app with Microsoft Foundry</a> module.</p>
+</div>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>3. Use the code_interpreter tool</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/03-code-interpreter">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/03-code-interpreter</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Use the code_interpreter tool</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The <em>code_interpreter</em> tool provides your model with a Python runtime in which it can generate and run Python code.</p>
+<h2 id="what-is-the-code_interpreter-tool">What is the code_interpreter tool?</h2>
+<p>The code_interpreter tool enables generative AI models to write and run Python code dynamically during a conversation. Rather than just discussing code or algorithms, the model can test its logic, process data, and return actual results from code. This transforms the model from a thinker into a doer.</p>
+<p>Key features include:</p>
+<ul>
+<li><strong>Dynamic Python Execution</strong>: The model writes and runs Python code in a sandboxed environment</li>
+<li><strong>File Handling</strong>: Upload, process, and download files (CSV, JSON, images, and so on)</li>
+<li><strong>Data Analysis</strong>: Perform calculations, statistical analysis, and data transformations on the fly</li>
+<li><strong>Real-time Feedback</strong>: The model sees code execution results and can iterate or fix errors</li>
+<li><strong>Complex Problem Solving</strong>: Tackle math problems, simulations, and logic puzzles through executable code</li>
+</ul>
+<h2 id="common-use-cases">Common use cases</h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data Analysis</strong></td>
+<td>Parse a CSV file and generate summary statistics</td>
+</tr>
+<tr>
+<td><strong>Math &amp; Physics</strong></td>
+<td>Solve differential equations or simulate physics scenarios</td>
+</tr>
+<tr>
+<td><strong>File Conversion</strong></td>
+<td>Convert between data formats (JSON ↔ CSV, and so on)</td>
+</tr>
+<tr>
+<td><strong>Prototyping</strong></td>
+<td>Test algorithms and ideas before formal implementation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-simple-example">A simple example</h2>
+<p>Here's how to use code_interpreter with the OpenAI Responses API:</p>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url={openai_endpoint},
+    api_key={auth_key_or_token}
+)
+
+# Get response using the code_interpreter tool
+response = client.responses.create(
+    model={model_deployment},
+    instructions="You are an AI assistant that provides information. Use the python tool to run code for math problems.",
+    input="What is the square root of 16?",
+    tools=[{"type": "code_interpreter",
+            "container": {"type": "auto"}}]
+)
+print(response.output_text)
+</code></pre>
+<p>The output from this code is similar to this:</p>
+<pre><code>The square root of 16 is 4.
+</code></pre>
+<p>More importantly, inspecting the details of the <strong>response</strong> object returned by the model reveals that the result was calculated and returned to the model using dynamically generated Python code like this:</p>
+<pre><code class="lang-python">import math
+
+# Calculate the square root of 16
+square_root = math.sqrt(16)
+square_root
+</code></pre>
+<h2 id="how-the-code_interpreter-tool-works">How the code_interpreter tool works</h2>
+<p>The general process for using the code_interpreter tool is:</p>
+<ol>
+<li><strong>You send a request</strong>: Include code_interpreter in your tools array.</li>
+<li><strong>Model analyzes the task</strong>: The model determines if code execution is needed.</li>
+<li><strong>Model generates code</strong>: The model writes Python code to accomplish the task.</li>
+<li><strong>Code runs</strong>: The code runs in a sandboxed environment with access to common libraries (for example, <em>pandas</em>, <em>numpy</em>, and <em>math</em>).</li>
+<li><strong>Results returned</strong>: The model receives the output and incorporates it into its response.</li>
+</ol>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li><strong>Be specific</strong>: Describe the data format and expected output clearly. Many models internally use the name <em>python tool</em> to identify the code_interpreter tool - so use this language in your instructions.</li>
+<li><strong>Provide context</strong>: Include relevant domain knowledge in your prompts</li>
+<li><strong>Validate results</strong>: Always review AI-generated code for correctness before using in production</li>
+<li><strong>Monitor costs</strong>: Code execution adds tokens; complex operations may use more resources</li>
+<li><strong>Leverage libraries</strong>: Common packages like pandas, numpy, and matplotlib are pre-installed</li>
+<li><strong>Error handling</strong>: The model can see errors and will attempt to fix them automatically</li>
+</ul>
+<h2 id="limitations-to-know-about">Limitations to know about</h2>
+<ul>
+<li>Executions run in a <strong>sandboxed environment</strong> with no external network access</li>
+<li>Some libraries may not be available; let the model know if a standard library fails</li>
+<li><strong>Timeout limits</strong> apply to long-running operations</li>
+<li>Code runs with <strong>memory constraints</strong>—massive datasets may need streaming or chunking</li>
+</ul>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>4. Use the web_search tool</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/04-web-search">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/04-web-search</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Use the web_search tool</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The <em>web_search</em> tool enables your model to retrieve fresh information from the web while generating a response.</p>
+<h2 id="what-is-the-web_search-tool">What is the web_search tool?</h2>
+<p>The web_search tool gives a generative AI model access to current, external information at runtime. Instead of relying only on training data, the model can issue a search query, review relevant sources, and produce an answer grounded in up-to-date content.</p>
+<p>This is especially useful when facts may change frequently, such as pricing, product releases, policy updates, or current events.</p>
+<p>Key features include:</p>
+<ul>
+<li><strong>Live information retrieval</strong> - Get recent information not available in static model training data</li>
+<li><strong>Source-grounded responses</strong> - Build answers from retrieved web content</li>
+<li><strong>Reduced hallucination risk</strong> - Improve reliability by checking external sources</li>
+<li><strong>Automatic query generation</strong> - The model decides when and how to search based on user intent</li>
+<li><strong>Seamless user experience</strong> - Search and response generation happen in one flow</li>
+</ul>
+<h2 id="common-use-cases">Common use cases</h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Current Events</strong></td>
+<td>Summarize key updates on a breaking technology announcement</td>
+</tr>
+<tr>
+<td><strong>Market Research</strong></td>
+<td>Compare recent product features or pricing across vendors</td>
+</tr>
+<tr>
+<td><strong>Policy Monitoring</strong></td>
+<td>Check whether regulations or guidance have changed</td>
+</tr>
+<tr>
+<td><strong>Fact Verification</strong></td>
+<td>Validate claims against reputable public sources</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-simple-example">A simple example</h2>
+<p>Here's a minimal example using the OpenAI Responses API with web search enabled:</p>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url={openai_endpoint},
+    api_key={auth_key_or_token}
+)
+
+# Get response using the web_search tool
+response = client.responses.create(
+    model={model_deployment},
+    instructions="You are an AI assistant. Use web search when current information is required.",
+    input="What are three major announcements from Microsoft Build this week?",
+    tools=[{"type": "web_search"}]
+)
+
+print(response.output_text)
+</code></pre>
+<p>The output will vary based on current web results, but it should include a concise answer grounded in recent sources.</p>
+<h2 id="how-the-web_search-tool-works">How the web_search tool works</h2>
+<p>The general process for using the web_search tool is:</p>
+<ol>
+<li><strong>You send a request</strong> - Include a web search tool in the tools array.</li>
+<li><strong>Model evaluates the question</strong> - It decides whether fresh web data is needed.</li>
+<li><strong>Search is performed</strong> - The model issues one or more search queries.</li>
+<li><strong>Results are reviewed</strong> - Relevant pages are selected and summarized.</li>
+<li><strong>Response is generated</strong> - The model combines search findings into the final answer.</li>
+</ol>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li><strong>Ask time-aware questions clearly</strong> - Include words like "latest", "current", or date ranges when needed</li>
+<li><strong>Set expectations for sources</strong> - Prompt for reputable or official sources when accuracy matters</li>
+<li><strong>Request concise outputs</strong> - Ask for short summaries with key points to reduce noise</li>
+<li><strong>Verify critical facts</strong> - For high-stakes scenarios, independently validate important claims</li>
+<li><strong>Track usage and latency</strong> - Web retrieval can increase response time and token usage</li>
+</ul>
+<h2 id="limitations-to-know-about">Limitations to know about</h2>
+<ul>
+<li>Results depend on what is publicly available and indexable at query time</li>
+<li>Source quality can vary, so output may still require human review</li>
+<li>Retrieved content may change over time, so repeated runs can produce different answers</li>
+<li>Some environments may apply regional, policy, or network restrictions to web access</li>
+</ul>
+<p>Used well, web_search helps your model move from static knowledge to timely, source-aware answers that are more useful in real-world workflows.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>5. Use the file_search tool</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/05-file-search">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/05-file-search</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Use the file_search tool</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The <em>file_search</em> tool lets your model retrieve relevant information from your own uploaded documents during a response.</p>
+<h2 id="what-is-the-file_search-tool">What is the file_search tool?</h2>
+<p>The file_search tool helps a model answer questions using private or domain-specific files, such as policy documents, manuals, contracts, and internal knowledge bases. Instead of relying only on general training data, the model can search indexed file content and return grounded answers.</p>
+<p>This is especially useful when you need accurate responses from trusted internal documents.</p>
+<p>Key features include:</p>
+<ul>
+<li><strong>Document-grounded answers</strong> - Responses are based on your uploaded files</li>
+<li><strong>Semantic retrieval</strong> - Finds relevant passages by meaning, not only exact keyword matches</li>
+<li><strong>Vector store integration</strong> - Search across one or more indexed document collections</li>
+<li><strong>Citations and transparency</strong> - Include matched results for debugging and traceability</li>
+<li><strong>Better enterprise relevance</strong> - Use organization-specific knowledge in model outputs</li>
+</ul>
+<h2 id="common-use-cases">Common use cases</h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Policy Q&amp;A</strong></td>
+<td>Answer employee questions from HR policy PDFs</td>
+</tr>
+<tr>
+<td><strong>Support Assistants</strong></td>
+<td>Retrieve product steps from internal troubleshooting guides</td>
+</tr>
+<tr>
+<td><strong>Legal Review</strong></td>
+<td>Locate specific clauses across contract documents</td>
+</tr>
+<tr>
+<td><strong>Knowledge Discovery</strong></td>
+<td>Summarize answers from technical documentation sets</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-simple-example">A simple example</h2>
+<p>Here's an example using the OpenAI Responses API with file_search enabled:</p>
+<pre><code class="lang-python">from openai import OpenAI
+
+client = OpenAI(
+    base_url={openai_endpoint},
+    api_key={auth_key_or_token}
+)
+
+# Create vector store and upload a file
+vector_store = client.vector_stores.create(name="policy-docs")
+client.vector_stores.files.upload_and_poll(
+    vector_store_id=vector_store.id,
+    file=open("expenses_policy.pdf", "rb")
+)
+
+# Get response using the file_search tool
+response = client.responses.create(
+    model=model_deployment,
+    instructions="You are an AI assistant that provides information from HR policy documents.",
+    input="What's the maximum amount I can claim for a taxi ride?",
+    tools=[{
+        "type": "file_search",
+        "vector_store_ids": [vector_store.id]
+    }],
+    include=["file_search_call.results"]
+)
+print(response.output_text)
+</code></pre>
+<p>In this flow, the model searches the indexed policy file and uses the retrieved passages to produce a grounded answer.</p>
+<h2 id="how-the-file_search-tool-works">How the file_search tool works</h2>
+<p>The general process for using the file_search tool is:</p>
+<ol>
+<li><strong>You prepare files</strong> - Upload documents to a vector store.</li>
+<li><strong>You send a request</strong> - Include file_search in the tools array with vector store IDs.</li>
+<li><strong>Model performs retrieval</strong> - It searches indexed chunks for relevant content.</li>
+<li><strong>Results are injected</strong> - Matching passages are provided to the model.</li>
+<li><strong>Response is generated</strong> - The model answers using retrieved document context.</li>
+</ol>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li><strong>Use high-quality source files</strong> - Clean, current documents improve retrieval accuracy</li>
+<li><strong>Write focused prompts</strong> - Ask specific questions to reduce ambiguous matches</li>
+<li><strong>Scope vector stores carefully</strong> - Separate domains (HR, legal, finance) when helpful</li>
+<li><strong>Include retrieval results in development</strong> - Use response includes for troubleshooting</li>
+<li><strong>Review answers for critical workflows</strong> - Keep human validation in high-stakes scenarios</li>
+</ul>
+<h2 id="limitations-to-know-about">Limitations to know about</h2>
+<ul>
+<li>Answer quality depends on document quality, coverage, and chunk relevance</li>
+<li>Very large or mixed-domain stores can return less focused context</li>
+<li>Updated source files may require re-indexing before new content is searchable</li>
+<li>Retrieval improves grounding but doesn't replace human review for sensitive decisions</li>
+</ul>
+<p>Used well, file_search turns a general-purpose model into a domain-aware assistant that can answer from the documents your team actually uses.</p>
+</div>
+<div class="NOTE">
+<p>Note</p>
+<p>The file_search tool is a great way to ground a model in a specific set of documents or data files. However, for enterprise-scale agents that need to access large quantities of data in multiple data stores, you should consider using the <em>Foundry IQ</em> knowledge store solution with a Microsoft Foundry agent. To learn more, see <a data-linktype="absolute-path" href="/en-us/training/modules/introduction-foundry-iq?azure-portal=true">Build knowledge-enhanced AI agents with Foundry IQ</a></p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>6. Use the function tool</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/06-function">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/06-function</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Use the function tool</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>The <em>function</em> tool allows your model to call developer-defined functions to retrieve data or trigger actions during a response.</p>
+<h2 id="what-is-the-function-tool">What is the function tool?</h2>
+<p>The function tool (function calling) lets a model decide when to call named tools you expose in your application. The model doesn't run your business logic directly. Instead, it returns a structured function call, your code runs the function, and then you pass the function output back to the model.</p>
+<p>This pattern is ideal for connecting model reasoning to real-world systems like APIs, databases, business workflows, and utility functions.</p>
+<p>Key features include:</p>
+<ul>
+<li><strong>Structured tool calls</strong> - The model emits explicit function-call requests</li>
+<li><strong>Developer-controlled execution</strong> - Your application decides how and where functions run</li>
+<li><strong>Reliable integration pattern</strong> - Call APIs, internal services, or helper utilities safely</li>
+<li><strong>Multi-turn orchestration</strong> - Return tool output and let the model continue reasoning</li>
+<li><strong>Grounded responses</strong> - Answers can include live, system-generated data</li>
+</ul>
+<h2 id="common-use-cases">Common use cases</h2>
+<table>
+<thead>
+<tr>
+<th>Use Case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>System Integration</strong></td>
+<td>Call an internal API for account or order details</td>
+</tr>
+<tr>
+<td><strong>Task Automation</strong></td>
+<td>Trigger workflows like ticket creation or notifications</td>
+</tr>
+<tr>
+<td><strong>Data Lookup</strong></td>
+<td>Query business rules or reference tables before answering</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-simple-example">A simple example</h2>
+<p>Here's an example that exposes a <code>get_time</code> function and lets the model call it when needed:</p>
+<pre><code class="lang-python">import time
+from openai import OpenAI
+
+# Function to get the current time
+def get_time():
+    return f"The time is {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())}"
+
+
+# Main function
+def main():
+    client = OpenAI(
+        base_url={openai_endpoint},
+        api_key={auth_key_or_token}
+    )
+
+    function_tools = [
+        {
+            "type": "function",
+            "name": "get_time",
+            "description": "Get the current time"
+        }
+    ]
+
+    # Initialize messages with a system prompt
+    messages = [
+        {"role": "developer", "content": "You are an AI assistant that provides information."},
+    ]
+
+    # Loop until the user types 'quit'
+    while True:
+        prompt = input("\nEnter a prompt (or type 'quit' to exit)\n")
+        if prompt.lower() == "quit":
+            break
+
+        # Append the user prompt to the messages
+        messages.append({"role": "user", "content": prompt})
+
+        # Get initial response
+        response = client.responses.create(
+            model=model_deployment,
+            input=messages,
+            tools=function_tools
+        )
+
+        # Append model output to the messages
+        messages += response.output
+
+        # Was there a function call?
+        for item in response.output:
+            if item.type == "function_call" and item.name == "get_time":
+                current_time = get_time()
+                messages.append({
+                    "type": "function_call_output",
+                    "call_id": item.call_id,
+                    "output": current_time
+                })
+
+                # Get a follow up response using the tool output
+                response = client.responses.create(
+                    model=model_deployment,
+                    instructions="Answer only with the tool output.",
+                    input=messages,
+                    tools=function_tools
+                )
+
+        print(response.output_text)
+
+
+# Run the main function when the script starts
+if __name__ == '__main__':
+    main()
+</code></pre>
+<p>In this flow, the model decides when to call <code>get_time</code>, your code runs the function, and the model then returns a grounded final answer. Since the user can enter any prompt, the model must determine when it needs to call the function. If it does, the response to the prompt will include a function call, that the application code must implement before submitting a new prompt with the output from the function for the model to process.</p>
+<p>The output might look something like this:</p>
+<pre><code>Enter a prompt (or type 'quit' to exit)
+Hello
+
+Hello! How can I help you today?
+
+Enter a prompt (or type 'quit' to exit)
+What time is it?
+
+The time is 2026-03-19 17:17:41.
+
+Enter a prompt (or type 'quit' to exit)
+</code></pre>
+<p>The first user prompt ("Hello") didn't require the use of the function tool, so the model responded normally. The second prompt ("What time is it?") triggered the model to select the <code>get_time</code> function, which it indicated in its response. The application code then ran the function and returned the results to the model, which then sent a second response with the results from the function.</p>
+<div class="TIP">
+<p>Tip</p>
+<p>This example uses a single function with no parameters. You can configure the tool to use multiple functions, with or without parameters. For more information about specifying function details, see the <a data-linktype="external" href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI developers guide</a>.</p>
+</div>
+<h2 id="how-the-function-tool-works">How the function tool works</h2>
+<p>The general process for using the function tool is:</p>
+<ol>
+<li><strong>You define tools</strong> - Provide one or more function definitions in the tools array.</li>
+<li><strong>Model evaluates the prompt</strong> - It determines whether a function call is needed.</li>
+<li><strong>Model emits a function call</strong> - The response includes the function name and call metadata.</li>
+<li><strong>Your app runs logic</strong> - Run the matching function in your code.</li>
+<li><strong>You return function output</strong> - Send a <code>function_call_output</code> item with the result.</li>
+<li><strong>Model completes the answer</strong> - It incorporates tool results into the final response.</li>
+</ol>
+<h2 id="best-practices">Best practices</h2>
+<ul>
+<li><strong>Keep tools focused</strong> - Small, single-purpose functions are easier to control and test</li>
+<li><strong>Validate function inputs</strong> - Never trust tool arguments blindly in production systems</li>
+<li><strong>Handle errors safely</strong> - Return clear error outputs the model can reason about</li>
+<li><strong>Log tool usage</strong> - Track calls, latency, and failure rates for debugging and governance</li>
+<li><strong>Limit sensitive operations</strong> - Require explicit authorization for high-impact actions</li>
+</ul>
+<h2 id="limitations-to-know-about">Limitations to know about</h2>
+<ul>
+<li>The model requests function calls, but your application must run them</li>
+<li>Incorrect or unexpected tool arguments can occur and should be validated</li>
+<li>Tool latency can increase end-to-end response time</li>
+<li>Function calling improves reliability, but final outputs still need review for critical decisions</li>
+</ul>
+<p>Used well, the function tool turns a model from a text generator into an orchestrator that can interact with real systems in a controlled, auditable way.</p>
+</div>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+
+    <div class="section">
+        <div class="section-header">
+            <h2>7. Summary</h2>
+            <a href="https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/09-summary">https://learn.microsoft.com/en-us/training/modules/use-generative-ai-tools/09-summary</a>
+        </div>
+        <div class="content"><main class="layout-body-main background-color-body-dark" data-bi-name="content" dir="ltr" id="main" lang="en-us" role="main">
+<div data-main-column="">
+<!-- Article header -->
+
+<!-- Unit navigation menu -->
+
+<!-- Main content area -->
+<div class="content margin-top-md"><div class="modular-content-container has-body-background box">
+<div class="section is-uniform position-relative" id="unit-inner-section">
+<h1 class="margin-right-xxl-desktop" id="module-unit-title">Summary</h1>
+
+
+<div aria-hidden="true" hidden="" id="module-unit-module-assessment-message-container"></div>
+<div hidden="" id="module-unit-notification-container"></div>
+<div id="module-unit-content">
+
+<div class="zone has-pivot" data-pivot="text">
+<p>In this module, you learned how tool calling extends a generative AI model from text-only reasoning to practical, grounded action.</p>
+<p>You explored how to configure tools in OpenAI Responses API requests and how each tool adds a different capability:</p>
+<ul>
+<li>The <strong>code_interpreter</strong> tool lets the model generate and run Python code for calculations, data analysis, and iterative problem solving.</li>
+<li>The <strong>web_search</strong> tool enables retrieval of current external information so responses can include timely, source-grounded content.</li>
+<li>The <strong>file_search</strong> tool helps the model answer questions from your own indexed documents and knowledge files.</li>
+<li>The <strong>function</strong> tool allows your application to run custom business logic and return results back to the model.</li>
+</ul>
+<p>Across all tools, the same core implementation pattern applies: define the tool in your request, let the model decide when to use it, return tool output when required, and validate responses for correctness and safety.</p>
+<p>As a next step, you can combine these techniques to build more capable assistants and evolve toward full agentic solutions with persisted instructions, tools, and orchestration.</p>
+</div>
+<h2 id="further-reading">Further reading</h2>
+<p>To learn more about using tools with models, see the following resources:</p>
+<ul>
+<li><a data-linktype="external" href="https://developers.openai.com/api/docs/guides/tools?azure-portal=true">OpenAI developer guide: Tools</a></li>
+<li><a data-linktype="external" href="https://developers.openai.com/api/docs/guides/function-calling">OpenAI developers Guide: Function calling</a></li>
+</ul>
+</div>
+<div class="modular-content-container" hidden="" id="next-section">
+</div>
+</div>
+</div>
+</div>
+<!-- Feedback area -->
+<div class="modular-content-container margin-block-xs">
+<section class="feedback-section section is-full-height is-uniform padding-block-none position-relative">
+<div class="font-weight-semibold display-none" id="ms--unit-support-message"></div>
+<div id="ms--unit-user-feedback">
+<!-- feedback section -->
+
+<!-- end feedback section -->
+</div>
+</section>
+</div>
+<!-- Interactive footer area -->
+</div>
+</main></div>
+    </div>
+</body>
+</html>
