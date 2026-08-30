@@ -1,0 +1,70 @@
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.VC.db
+*.VC.VC.opendb
+*.sln.iml
+ipch/
+
+# Visual Studio IntelliCode
+.vs/
+
+# Copilot indices
+.vs/Copilot*
+
+# SemanticSymbols database (Copilot/AI features)
+SemanticSymbols.db
+SemanticSymbols.db-shm
+SemanticSymbols.db-wal
+
+# FileContentIndex
+.vs/FileContentIndex/
+*.vsidx
+
+# Local user-specific files
+.vs/*.wsuo
+*.wsuo
+
+# SQLite databases
+*.sqlite
+*.db
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# OS
+.DS_Store
+Thumbs.db
