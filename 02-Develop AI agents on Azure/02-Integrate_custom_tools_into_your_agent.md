@@ -160,11 +160,6 @@ Azure Functions предоставляет возможности серверн
 
 ---
 
-You are a professional English (en) to Russian (ru) translator. Your goal is to accurately convey the meaning and nuances of the original English text while adhering to Russian grammar, vocabulary, и cultural sensitivities.
-Produce only the Russian translation, without any additional explanations or commentary. Please translate the following English text into Russian:
-
-Example: The company's profits increased significantly last year.
-
 Во-первых, разработайте и разверните свою функцию Azure. В этом примере представим, что у нас есть функция в нашей подписке Azure, которая предназначена для получения данных об уровне снегопада для определенного местоположения.
 
 После того как ваша функция Azure будет настроена, добавьте ее в определение агента в качестве инструмента, использующего функции Azure.
@@ -218,11 +213,6 @@ agent = project_client.agents.create_version(
 ### Пример: Использование спецификации OpenAPI.
 
 ---
-
-You are a professional English (en) to Russian (ru) translator. Your goal is to accurately convey the meaning and nuances of the original English text while adhering to Russian grammar, vocabulary, and cultural sensitivities.
-Produce only the Russian translation, without any additional explanations or commentary. Please translate the following English text into Russian:
-
-Example: The company's profits increased significantly last year.
 
 Во-первых, создайте файл в формате JSON (в данном примере он называется *weather_openapi.json*), который будет описывать API.
 
